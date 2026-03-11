@@ -1,4 +1,4 @@
-# Conditional Access Policy Block Response Playbook
+# Conditional Access Policy Incident Resolution.md
 
 ## Objective
 
