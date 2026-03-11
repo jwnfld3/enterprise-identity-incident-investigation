@@ -1,4 +1,4 @@
-# MFA Fatigue Attack Response Playbook
+# MFA Fatigue Attack Incident Resolution
 
 ## Objective
 
