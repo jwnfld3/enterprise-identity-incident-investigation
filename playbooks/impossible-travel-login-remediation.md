@@ -1,5 +1,9 @@
 # Impossible Travel Login Remediation
 
+**Playbook Type:** Incident Response  
+**Threat Category:** Identity Attack  
+**Severity:** High  
+**Platform:** Microsoft Entra ID / Microsoft 365
 ## Objective
 
 Investigate and remediate sign-in events where a user appears to authenticate from two geographically distant locations within an unrealistic timeframe.
