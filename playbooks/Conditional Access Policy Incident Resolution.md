@@ -1,4 +1,4 @@
-# Conditional Access Policy Incident Resolution.md
+# Conditional Access Policy Incident Resolution
 
 ## Objective
 
