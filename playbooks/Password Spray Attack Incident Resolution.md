@@ -1,4 +1,4 @@
-# Password Spray Attack Response Playbook
+# Password Spray Attack Incident Resolution
 
 ## Objective
 
