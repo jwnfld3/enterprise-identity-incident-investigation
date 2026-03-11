@@ -1,4 +1,4 @@
-# # Impossible Travel Login Remediation
+# Impossible Travel Login Remediation
 
 ## Objective
 
