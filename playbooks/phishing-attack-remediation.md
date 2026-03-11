@@ -1,5 +1,10 @@
 # Phishing Attack Remediation
 
+**Playbook Type:** Incident Response  
+**Threat Category:** Identity Attack  
+**Severity:** High  
+**Platform:** Microsoft Entra ID / Microsoft 365
+
 This playbook outlines the procedures for investigating phishing attacks targeting enterprise users.
 
 ---
