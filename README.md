@@ -49,4 +49,4 @@ The objective of the investigation was to determine whether the login activity r
 
 ## Investigation Report
 
-[View Incident Report](incident-report.md)
+[View Incident Report](https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/incident-report)
