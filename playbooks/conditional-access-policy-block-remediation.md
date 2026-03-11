@@ -1,5 +1,10 @@
 # Conditional Access Policy Block Remediation
 
+**Playbook Type:** Security Control Remediation  
+**Threat Category:** Access Control Enforcement  
+**Severity:** Medium  
+**Platform:** Microsoft Entra ID / Microsoft 365
+
 ## Objective
 
 Review and validate a Conditional Access block event, determine whether the block was expected, and ensure secure access is maintained.
