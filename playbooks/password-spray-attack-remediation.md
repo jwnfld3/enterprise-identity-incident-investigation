@@ -1,4 +1,4 @@
-# Password Spray Attack Incident Resolution
+# Password Spray Attack Remediation
 
 ## Objective
 
