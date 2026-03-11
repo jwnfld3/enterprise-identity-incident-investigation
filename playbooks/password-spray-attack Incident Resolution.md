@@ -1,4 +1,4 @@
-# Password Spray Attack Response Playbook
+# Password Spray Attack Incident Resolution
 
 This playbook describes the investigation process for password spray attacks targeting enterprise accounts.
 
