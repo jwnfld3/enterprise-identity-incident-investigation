@@ -1,4 +1,4 @@
-# MFA Fatigue Attack Incident Resolution
+# MFA Fatigue Attack Remediation
 
 ## Objective
 
