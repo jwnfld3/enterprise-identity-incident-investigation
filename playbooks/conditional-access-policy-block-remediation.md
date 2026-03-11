@@ -1,4 +1,4 @@
-# Conditional Access Policy Incident Resolution
+# Conditional Access Policy Block Remediation
 
 ## Objective
 
