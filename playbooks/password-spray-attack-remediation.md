@@ -1,5 +1,9 @@
 # Password Spray Attack Remediation
 
+**Playbook Type:** Incident Response  
+**Threat Category:** Identity Attack  
+**Severity:** High  
+**Platform:** Microsoft Entra ID / Microsoft 365
 ## Objective
 
 Identify and contain a password spray attack targeting multiple accounts and reduce the likelihood of successful unauthorized access.
