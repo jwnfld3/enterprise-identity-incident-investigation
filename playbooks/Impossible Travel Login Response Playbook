@@ -1,0 +1,89 @@
+# Impossible Travel Login Response Playbook
+
+## Objective
+
+Investigate and remediate sign-in events where a user appears to authenticate from two geographically distant locations within an unrealistic timeframe.
+
+---
+
+## Step 1 – Review the Risk Alert
+
+1. Sign in to the **Microsoft Entra admin center**.
+2. Navigate to **Identity Protection** if available.
+3. Open the relevant **Impossible travel** alert or risky sign-in event.
+4. Note the affected user and timestamps.
+
+---
+
+## Step 2 – Review Sign-In Logs
+
+1. Navigate to **Identity**.
+2. Select **Monitoring & health**.
+3. Click **Sign-in logs**.
+4. Filter for the affected user.
+5. Review the sequence of successful sign-ins.
+6. Compare:
+   - timestamps
+   - IP addresses
+   - locations
+   - device details
+
+---
+
+## Step 3 – Compare Known Activity
+
+1. Review the user’s normal sign-in pattern.
+2. Identify which sign-in appears legitimate and which appears suspicious.
+3. Document the differences.
+
+---
+
+## Step 4 – Verify User Activity
+
+1. Contact the user.
+2. Ask whether travel occurred during the relevant window.
+3. Confirm the device and location used.
+4. Document the user’s response.
+
+---
+
+## Step 5 – Reset the Password if Suspicious
+
+1. Navigate to **Users**.
+2. Open the affected user account.
+3. Click **Reset password**.
+4. Require password change at next sign-in.
+
+---
+
+## Step 6 – Revoke Sessions
+
+1. Open the affected user account.
+2. Select **Revoke sessions**.
+3. Confirm the action.
+
+---
+
+## Step 7 – Review MFA and Conditional Access
+
+1. Navigate to **Protection**.
+2. Review **Conditional Access** policies.
+3. Confirm that:
+   - MFA is required
+   - risky sign-ins are controlled
+   - legacy authentication is blocked
+4. Update protections if needed.
+
+---
+
+## Step 8 – Monitor the Account
+
+1. Return to **Sign-in logs**.
+2. Watch for repeated suspicious activity.
+3. Confirm the user only authenticates from expected locations afterward.
+
+---
+
+## Resolution
+
+The impossible travel event was investigated, user activity was validated, and account protections were applied to prevent unauthorized access.
