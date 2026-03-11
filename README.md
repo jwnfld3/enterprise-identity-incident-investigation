@@ -45,8 +45,3 @@ The objective of the investigation was to determine whether the login activity r
 5 Implement containment actions  
 6 Document findings and lessons learned  
 
----
-
-## Investigation Report
-
-[View Incident Report](https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/incident-report.md)
