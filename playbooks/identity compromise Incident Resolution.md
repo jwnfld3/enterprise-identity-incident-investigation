@@ -1,4 +1,4 @@
-# Identity Compromise Response Playbook
+# Identity Compromise Incident Resolution
 
 This playbook outlines the investigation and remediation procedures for suspected user account compromise within Microsoft Entra ID.
 
