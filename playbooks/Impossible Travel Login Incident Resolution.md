@@ -1,4 +1,4 @@
-# Impossible Travel Login Response Playbook
+# Impossible Travel Login Response Playbook Incident Resolution
 
 ## Objective
 
