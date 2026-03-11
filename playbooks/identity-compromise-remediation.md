@@ -1,5 +1,11 @@
 # Identity Compromise Remediation
 
+**Playbook Type:** Incident Response  
+**Threat Category:** Identity Compromise  
+**Severity:** Critical  
+**Platform:** Microsoft Entra ID / Microsoft 365
+
+
 This playbook outlines the investigation and remediation procedures for suspected user account compromise within Microsoft Entra ID.
 
 ---
