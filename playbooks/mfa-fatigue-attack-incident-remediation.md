@@ -1,5 +1,9 @@
 # MFA Fatigue Attack Remediation
 
+**Playbook Type:** Incident Response  
+**Threat Category:** Identity Attack  
+**Severity:** High  
+**Platform:** Microsoft Entra ID / Microsoft 365
 ## Objective
 
 Stop repeated Multi-Factor Authentication prompts, secure the affected account, and prevent additional unauthorized authentication attempts.
