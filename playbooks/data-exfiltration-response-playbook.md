@@ -1,5 +1,10 @@
 # Data Exfiltration Investigation Remediation
 
+**Playbook Type:** Incident Response  
+**Threat Category:** Data Exfiltration  
+**Severity:** Critical  
+**Platform:** Microsoft Entra ID / Microsoft 365
+
 ## Objective
 
 Identify, contain, and remediate suspected data exfiltration involving Microsoft 365 cloud services such as SharePoint Online and OneDrive.
