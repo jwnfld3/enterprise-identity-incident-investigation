@@ -1,4 +1,4 @@
-# Enterprise Identity Security Investigation
+# Enterprise Identity Incident Investigation
 
 This project documents a simulated enterprise identity security investigation involving suspicious authentication activity detected in Microsoft Entra ID.
 
