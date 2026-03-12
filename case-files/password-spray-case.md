@@ -1,10 +1,13 @@
 # Password Spray Attack Investigation Case File
 
+**Case ID:** CASE-001  
 **Incident Type:** Credential Access Attack  
 **Severity:** High  
 **Platform:** Microsoft Entra ID / Microsoft 365  
+**Primary Detection Source:** Microsoft Sentinel  
 **MITRE ATT&CK Technique:** T1110.003 Password Spraying  
-**Case Status:** Resolved  
+**Status:** Resolved  
+**Analyst:** Security Operations Lab  
 
 ---
 
