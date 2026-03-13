@@ -1,53 +1,73 @@
-# Phishing Authentication Attempt Detection
+# Phishing Login Detection
 
 Detection Type: Identity Threat Detection  
 Platform: Microsoft Sentinel  
 Query Language: Kusto Query Language (KQL)
 
----
-
 ## Overview
 
-Phishing attacks attempt to steal user credentials by tricking users into entering their username and password into fraudulent login pages.
+Phishing attacks attempt to steal user credentials through malicious emails or login pages.
 
-After obtaining credentials, attackers attempt to authenticate to enterprise systems.
-
----
+Attackers may use stolen credentials to access enterprise systems.
 
 ## Purpose
 
-The purpose of this detection is to identify suspicious authentication attempts following potential credential phishing events.
-
----
+Detect authentication activity that may occur after phishing credential theft.
 
 ## Data Sources
 
-Relevant log sources include:
-
+- Microsoft Defender for Office 365
 - Microsoft Entra ID Sign-in Logs
-- Azure AD Authentication Logs
-- Microsoft Sentinel SigninLogs table
-
----
+- Email security logs
 
 ## Detection Logic
 
-Indicators of phishing-based login attempts include:
+Indicators include:
 
-- login attempts from unfamiliar locations
-- authentication attempts following credential reset
-- unusual device or application activity
+- login following phishing email interaction
+- authentication from suspicious locations
+- login from unfamiliar devices
 
----
+## Click by Click Learning Process
+
+1. Open Microsoft Defender Portal.
+2. Navigate to Threat Explorer.
+3. Identify phishing emails.
+4. Check user interaction.
+5. Review sign-in logs.
+6. Identify suspicious logins.
+7. Document findings.
 
 ## Detection Query
 
-```kusto
+```kql
 SigninLogs
 | where ResultType == 0
-| summarize LoginCount = count() by UserPrincipalName, IPAddress, bin(TimeGenerated, 30m)
-| where LoginCount > 5
-| order by LoginCount desc
+| where RiskLevelDuringSignIn != "none"
 ```
 
-This query identifies repeated successful authentication attempts from the same IP address within a short timeframe, which may indicate credential abuse following phishing.
+## Investigation Process
+
+1. Review Sentinel alert.
+2. Identify affected user.
+3. Review phishing email event.
+4. Review login activity.
+5. Identify IP address and location.
+6. Determine whether credentials were stolen.
+7. Document findings.
+8. Escalate incident if necessary.
+
+## Related Case File
+
+Case 005 Phishing Login Investigation  
+https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/case-files/case-005-phishing-login.md
+
+## Remediation Playbook
+
+Phishing Attack Remediation  
+https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/playbooks/phishing-attack-remediation.md
+
+## Documentation Sources
+
+Microsoft Defender for Office 365  
+https://learn.microsoft.com/en-us/defender-office-365/
