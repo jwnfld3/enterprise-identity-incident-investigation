@@ -331,3 +331,11 @@ Users are part of the security process. Awareness reduces the likelihood of repe
 ## Resolution
 
 The suspected identity compromise was investigated, suspicious sign in activity was reviewed, the user’s credentials and sessions were reset, account protections were strengthened, and the account was monitored to confirm secure access was restored.
+
+### Documentation Sources
+
+Microsoft Entra Identity Protection  
+https://learn.microsoft.com/en-us/entra/id-protection/
+
+Microsoft Account Compromise Response  
+https://learn.microsoft.com/en-us/security/operations/responding-to-a-compromised-account
