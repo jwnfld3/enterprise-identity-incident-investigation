@@ -43,9 +43,18 @@ playbooks/impossible-travel-login-remediation.md
 
 Actions taken:
 
-- session revocation
-- password reset
-- MFA verification
+### Click by Click Learning Process
+
+1. Sign in to the Microsoft Entra Admin Center.
+2. Navigate to Identity Protection.
+3. Select Risky Sign-ins.
+4. Locate the alert associated with the user account.
+5. Review the locations associated with the sign-ins.
+6. Compare timestamps of each authentication event.
+7. Determine whether physical travel between locations was possible.
+8. Review device and browser information.
+9. Identify the IP addresses associated with each login.
+10. Document investigation findings.
 
 ---
 
@@ -58,3 +67,11 @@ Investigation determined the activity was suspicious but no confirmed compromise
 # Case Status
 
 Resolved
+
+### Documentation Sources
+
+Microsoft Impossible Travel Detection  
+https://learn.microsoft.com/en-us/defender-cloud-apps/anomaly-detection-policy
+
+Microsoft Entra Identity Protection Risk Events  
+https://learn.microsoft.com/en-us/entra/id-protection/
