@@ -1,33 +1,35 @@
-# Phishing Login Attempt Log
+# Phishing Login Authentication Log
 
-This log represents authentication attempts detected following a suspected phishing attack targeting user credentials.
+## Overview
 
-Phishing attacks attempt to trick users into entering their credentials into a fraudulent login page.
+This log captures authentication activity associated with a phishing credential theft scenario.
 
----
+Attackers often obtain user credentials through phishing emails and then attempt to authenticate to enterprise services.
 
-## Authentication Attempts
+## Evidence Source
 
-| Timestamp (UTC) | Username | Source IP | Location | Result |
-|-----------------|----------|-----------|----------|--------|
-| 2026-03-19 13:12 | jsmith@company.com | 193.36.117.44 | Amsterdam, Netherlands | Failure |
-| 2026-03-19 13:13 | jsmith@company.com | 193.36.117.44 | Amsterdam, Netherlands | Failure |
-| 2026-03-19 13:14 | jsmith@company.com | 193.36.117.44 | Amsterdam, Netherlands | MFA Required |
+Authentication events were collected from Microsoft Entra ID Sign-in Logs.
 
----
+| Timestamp | Username | Source IP | Location | Result |
+|-----------|----------|-----------|----------|--------|
+| 2026-03-13 14:22 | jsmith@company.com | 202.44.12.19 | Singapore | Success |
 
-## Observations
+## Click-by-Click Learning Process
 
-Authentication attempts occurred shortly after the user reported receiving a suspicious email requesting login verification.
+1. Opened Microsoft Defender Portal.
+2. Navigated to Threat Explorer.
+3. Identified phishing email event.
+4. Checked user interaction with the email.
+5. Reviewed authentication activity.
+6. Identified suspicious login event.
+7. Documented login details.
 
-The login attempts originated from a location outside the user's normal login pattern.
+## Related Case File
 
----
+Case 005 Phishing Login Investigation  
+https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/case-files/case-005-phishing-login.md
 
-## Security Controls Triggered
+## Documentation Sources
 
-Multi-Factor Authentication challenge
-
-Suspicious login alert
-
-Security investigation initiated
+Microsoft Defender for Office 365  
+https://learn.microsoft.com/en-us/defender-office-365/
