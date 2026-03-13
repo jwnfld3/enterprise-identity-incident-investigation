@@ -1,50 +1,46 @@
-# Brute Force Login Log
+# Brute Force Login Authentication Log
 
 ## Overview
 
-This log contains authentication activity captured during a simulated brute force login attempt against Microsoft 365 user accounts.
+This log contains authentication activity captured during a brute force login attempt targeting Microsoft 365 user accounts.
 
-The activity represents repeated authentication attempts originating from a single external IP address targeting multiple accounts.
+Brute force attacks involve repeatedly attempting different passwords against a specific user account until the correct password is discovered.
 
-These logs were used as supporting evidence during the investigation of suspicious authentication activity.
+These attacks generate large numbers of authentication failures within a short period of time.
 
 ## Evidence Source
 
-Authentication activity was collected from Microsoft Entra ID sign in logs and exported as part of the investigation evidence.
+Authentication events were collected from Microsoft Entra ID Sign-in Logs during the investigation.
 
 | Timestamp (UTC) | Username | Source IP | Application | Result |
 |-----------------|----------|-----------|-------------|--------|
 | 2026-03-12 02:10 | jsmith@company.com | 91.214.44.18 | Microsoft 365 | Failure |
-| 2026-03-12 02:10 | mgarcia@company.com | 91.214.44.18 | Microsoft 365 | Failure |
-| 2026-03-12 02:11 | dlee@company.com | 91.214.44.18 | Microsoft 365 | Failure |
-| 2026-03-12 02:11 | awalker@company.com | 91.214.44.18 | Microsoft 365 | Failure |
-| 2026-03-12 02:12 | jsmith@company.com | 91.214.44.18 | Microsoft 365 | Account Locked |
+| 2026-03-12 02:11 | jsmith@company.com | 91.214.44.18 | Microsoft 365 | Failure |
+| 2026-03-12 02:12 | jsmith@company.com | 91.214.44.18 | Microsoft 365 | Failure |
+| 2026-03-12 02:13 | jsmith@company.com | 91.214.44.18 | Microsoft 365 | Account Locked |
 
-These authentication attempts demonstrate repeated login failures from a single external IP address targeting multiple accounts, which is commonly associated with automated credential attacks.
+This authentication pattern shows repeated password attempts targeting a single account.
 
-## Click by Click Learning Process
+## Click-by-Click Learning Process
 
-1. Signed in to the Microsoft Entra Admin Center.
+1. Signed in to Microsoft Entra Admin Center.
 2. Navigated to Identity.
 3. Selected Monitoring.
-4. Opened Sign in Logs.
-5. Filtered the results for failed authentication attempts.
-6. Reviewed the timestamps of the failed logins.
-7. Identified repeated login attempts originating from the same source IP address.
-8. Reviewed the list of usernames targeted during the activity.
-9. Documented the application involved in the authentication attempts.
-10. Recorded the authentication results, including failed attempts and account lockout events.
-11. Preserved the authentication log activity as supporting evidence for the investigation.
-12. Linked the evidence to the related case file for incident documentation.
+4. Opened Sign-in Logs.
+5. Filtered results for failed authentication attempts.
+6. Identified repeated login attempts targeting a single account.
+7. Reviewed timestamps of authentication events.
+8. Documented authentication failures and account lockout events.
+9. Preserved the authentication logs as evidence.
 
 ## Related Case File
 
-Case 001 Password Spray Investigation  
-https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/case-files/case-001-password-spray.md
+Case 002 Identity Compromise Investigation  
+https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/case-files/case-002-identity-compromise.md
 
 ## Documentation Sources
 
-Microsoft Entra ID Sign in Logs  
+Microsoft Entra Sign-in Logs  
 https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-sign-ins
 
 MITRE ATT&CK Brute Force  
