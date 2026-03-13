@@ -281,3 +281,11 @@ Monitoring is necessary because attackers may retry from another IP address or l
 ## Resolution
 
 The impossible travel event was investigated, the affected user’s activity was verified, suspicious access was contained as needed, and account protections were reviewed to reduce the risk of unauthorized access.
+
+### Documentation Sources
+
+Microsoft Identity Protection Risk Events  
+https://learn.microsoft.com/en-us/entra/id-protection/concept-identity-protection-risks
+
+Microsoft Impossible Travel Detection  
+https://learn.microsoft.com/en-us/defender-cloud-apps/anomaly-detection-policy
