@@ -43,9 +43,18 @@ playbooks/phishing-attack-remediation.md
 
 Actions taken:
 
-- password resets
-- MFA enforcement
-- user notification
+### Click by Click Learning Process
+
+1. Access the Microsoft Defender Portal.
+2. Navigate to Email and Collaboration.
+3. Open Threat Explorer.
+4. Search for the suspicious email.
+5. Review sender domain and email headers.
+6. Identify malicious links or attachments.
+7. Determine whether the user clicked the phishing link.
+8. Cross reference authentication activity within sign-in logs.
+9. Identify successful login attempts following the phishing event.
+10. Document investigation results.
 
 ---
 
@@ -58,3 +67,11 @@ User accounts were secured and phishing indicators were documented.
 # Case Status
 
 Resolved
+
+### Documentation Sources
+
+Microsoft Defender Phishing Investigation Guide  
+https://learn.microsoft.com/en-us/defender-office-365/anti-phishing
+
+Microsoft Security Operations Documentation  
+https://learn.microsoft.com/en-us/security/operations/
