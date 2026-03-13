@@ -480,3 +480,14 @@ Attackers may try again after containment. Continued monitoring helps confirm th
 ## Resolution
 
 The suspected data exfiltration activity was investigated, the affected account was secured, active sessions were revoked, password and authentication controls were reset, sharing settings were reviewed, and policy protections were validated to reduce future risk.
+
+### Documentation Sources
+
+Microsoft 365 Audit Log Search  
+https://learn.microsoft.com/en-us/microsoft-365/compliance/audit-log-search
+
+Microsoft Defender for Cloud Apps Investigation  
+https://learn.microsoft.com/en-us/defender-cloud-apps/investigate-activities
+
+Microsoft Data Loss Prevention Documentation  
+https://learn.microsoft.com/en-us/microsoft-365/compliance/dlp-learn-about-dlp
