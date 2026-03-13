@@ -1,33 +1,35 @@
 # Token Theft Authentication Log
 
-This log represents authentication activity associated with a suspected token theft attack.
+## Overview
 
-Token theft occurs when an attacker obtains a valid authentication token and attempts to reuse it to access enterprise resources without re-entering credentials.
+This log documents suspicious authentication sessions potentially associated with stolen authentication tokens.
 
----
+Token theft allows attackers to maintain session access without repeatedly authenticating.
 
-## Authentication Activity
+## Evidence Source
 
-| Timestamp (UTC) | User | Source IP | Application | Session Type | Result |
-|-----------------|------|-----------|-------------|--------------|--------|
-| 2026-03-18 09:10 | jsmith@company.com | 73.142.55.20 | Microsoft 365 | Interactive Login | Success |
-| 2026-03-18 09:42 | jsmith@company.com | 185.199.110.42 | SharePoint Online | Token Reuse | Success |
-| 2026-03-18 09:43 | jsmith@company.com | 185.199.110.42 | OneDrive | Token Reuse | Success |
+Session activity was obtained from Microsoft Entra ID authentication logs.
 
----
+| Timestamp | Username | IP Address | Application | Result |
+|-----------|----------|------------|-------------|--------|
+| 2026-03-14 10:05 | awalker@company.com | 173.88.44.19 | Microsoft Teams | Success |
 
-## Observations
+## Click-by-Click Learning Process
 
-Authentication tokens issued to the user session were reused from a different geographic location.
+1. Opened Microsoft Entra Admin Center.
+2. Navigated to Sign-in Logs.
+3. Identified active authentication sessions.
+4. Reviewed device information.
+5. Reviewed IP address information.
+6. Identified abnormal session activity.
+7. Documented authentication session data.
 
-The login originated from an IP address not previously associated with the user.
+## Related Case File
 
----
+Case 006 Token Theft Investigation  
+https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/case-files/case-006-token-theft.md
 
-## Security Controls Triggered
+## Documentation Sources
 
-Sign-in risk alert generated
-
-Session anomaly detected
-
-Security investigation initiated
+Microsoft Entra Identity Protection  
+https://learn.microsoft.com/en-us/entra/id-protection/
