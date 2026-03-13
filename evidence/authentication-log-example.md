@@ -1,55 +1,50 @@
 # Authentication Log Example
 
-The following example represents a simulated authentication log review performed during the investigation of suspicious login activity detected in Microsoft Entra ID.
+## Overview
 
-These logs were analyzed to determine whether the authentication attempts represented legitimate user activity or a potential unauthorized access attempt.
+This log demonstrates a sample authentication record captured from Microsoft Entra ID sign-in logs.
 
----
+Authentication logs provide detailed records of login activity within Microsoft 365 environments. Each sign-in event typically includes the timestamp of the login attempt, the user account involved, the source IP address, the application accessed, and the authentication result.
 
-## Authentication Log Entries
+Security analysts use authentication logs to investigate suspicious login attempts, identify potential credential attacks, and verify legitimate user access patterns.
 
-| Timestamp (UTC) | User | Application | Location | Device | Result |
-|-----------------|------|------------|---------|--------|--------|
-| 2026-03-10 14:02 | jsmith@company.com | Microsoft 365 | Seattle, WA, USA | Windows 11 | Success |
-| 2026-03-10 14:05 | jsmith@company.com | SharePoint Online | Seattle, WA, USA | Windows 11 | Success |
-| 2026-03-10 14:11 | jsmith@company.com | Microsoft 365 | Bucharest, Romania | Unknown Device | Failure |
-| 2026-03-10 14:12 | jsmith@company.com | Microsoft 365 | Bucharest, Romania | Unknown Device | Failure |
-| 2026-03-10 14:13 | jsmith@company.com | Microsoft 365 | Bucharest, Romania | Unknown Device | Blocked |
+## Evidence Source
 
----
+Authentication activity was collected from Microsoft Entra ID Sign-in Logs.
 
-## Observations
+| Timestamp (UTC) | Username | Source IP | Location | Application | Result |
+|-----------------|----------|-----------|----------|-------------|--------|
+| 2026-03-15 01:12 | jsmith@company.com | 44.21.101.5 | United States | Microsoft 365 | Success |
+| 2026-03-15 01:15 | mgarcia@company.com | 77.91.33.10 | Poland | Microsoft 365 | Failure |
+| 2026-03-15 01:17 | dlee@company.com | 91.214.44.18 | Germany | Microsoft 365 | Success |
 
-Recent successful logins were observed from Seattle, Washington, which matches the user's normal login location.
+These authentication events demonstrate both successful and failed login attempts recorded within the Microsoft 365 environment.
 
-Shortly afterward, multiple authentication attempts were detected from Bucharest, Romania using an unknown device.
+## Click-by-Click Learning Process
 
-The authentication attempts from Romania failed and were blocked by existing authentication policies.
+1. Signed in to the Microsoft Entra Admin Center.
+2. Navigated to **Identity**.
+3. Selected **Monitoring**.
+4. Opened **Sign-in Logs**.
+5. Filtered authentication events by time range.
+6. Reviewed user login activity.
+7. Identified source IP addresses associated with authentication attempts.
+8. Examined geographic location information for login events.
+9. Reviewed authentication results for each event.
+10. Documented the relevant authentication activity for investigation purposes.
 
----
+## Related Case File
 
-## Investigation Notes
+Case 002 Identity Compromise Investigation  
+https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/case-files/case-002-identity-compromise.md
 
-The login attempts originating from Romania were identified as anomalous because the user typically signs in from the United States.
+## Documentation Sources
 
-Device information associated with the suspicious login attempts did not match any device previously registered to the user account.
+Microsoft Entra Sign-in Logs  
+https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-sign-ins
 
-Based on the log analysis and user verification, the login attempts were determined to represent a potential unauthorized access attempt.
+Microsoft Entra Monitoring and Logs  
+https://learn.microsoft.com/en-us/entra/identity/monitoring-health/
 
----
-
-## Security Controls Triggered
-
-Multi-Factor Authentication challenge triggered
-
-Conditional Access policy evaluation
-
-Risk based authentication detection
-
----
-
-## Conclusion
-
-The authentication logs indicate that the suspicious login attempts were unsuccessful and blocked by existing security controls.
-
-The user account was secured by resetting credentials and verifying Multi-Factor Authentication enrollment.
+MITRE ATT&CK Credential Access Techniques  
+https://attack.mitre.org/
