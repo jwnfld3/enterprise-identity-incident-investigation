@@ -294,3 +294,14 @@ Retesting proves whether the issue was resolved. It also confirms whether the Co
 ## Resolution
 
 The blocked sign in was reviewed, the responsible Conditional Access policy was identified, the user’s sign in attempt was verified, and policy behavior was confirmed or corrected as needed to maintain secure access.
+
+### Documentation Sources
+
+Microsoft Conditional Access Overview  
+https://learn.microsoft.com/en-us/entra/identity/conditional-access/overview
+
+Microsoft Entra Sign in Logs  
+https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-sign-ins
+
+Microsoft Conditional Access Troubleshooting  
+https://learn.microsoft.com/en-us/entra/identity/conditional-access/troubleshoot-conditional-access
