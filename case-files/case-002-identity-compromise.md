@@ -53,10 +53,18 @@ playbooks/identity-compromise-remediation.md
 
 Actions taken:
 
-- password reset
-- session revocation
-- MFA verification
-- monitoring for additional suspicious activity
+### Click by Click Learning Process
+
+1. Access the Microsoft Entra Admin Center.
+2. Navigate to Identity.
+3. Select Users.
+4. Locate the suspected user account.
+5. Open the user profile.
+6. Review the Sign-in activity section.
+7. Identify sign-ins from unusual geographic locations or unknown devices.
+8. Check authentication methods used during the login attempt.
+9. Verify whether the user reported suspicious activity.
+10. Document findings and determine if the account was compromised.
 
 ---
 
@@ -69,3 +77,11 @@ The compromised account was secured and authentication monitoring was increased 
 # Case Status
 
 Resolved
+
+### Documentation Sources
+
+Microsoft Entra Risky Sign-ins Documentation  
+https://learn.microsoft.com/en-us/entra/id-protection/
+
+Microsoft Security Incident Response Guidance  
+https://learn.microsoft.com/en-us/security/operations/
