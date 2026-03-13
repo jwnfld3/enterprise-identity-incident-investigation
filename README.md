@@ -1,79 +1,90 @@
-# Enterprise Identity Security Incident Investigation
+# Incident Response Playbooks
 
-## Project Overview
+The following playbooks document investigation and remediation procedures for identity-based security incidents simulated within this lab environment.
 
-This repository contains a collection of enterprise identity security investigations designed to simulate real-world attack scenarios within Microsoft cloud environments.
-
-The project demonstrates threat detection, authentication log analysis, and structured incident response procedures using Microsoft Entra ID, Microsoft 365, and Microsoft Sentinel.
-
-Each investigation documents the analysis process, maps adversary behavior to the MITRE ATT&CK framework, and outlines remediation actions used to contain and resolve the security event.
+These procedures were developed through hands-on practice in a Microsoft security lab, step-by-step testing in Microsoft Sentinel and Microsoft Entra ID, and review of publicly available Microsoft and MITRE documentation.
 
 ---
 
-# Security and Infrastructure Technologies
+## How I Learned the Investigation and Remediation Process
 
-| Category | Technologies |
-|:----------|:-------------|
-| Identity Security | Microsoft Entra ID, Identity and Access Management |
-| Security Monitoring | Microsoft Sentinel, Microsoft Defender |
-| Cloud Platform | Microsoft 365 Security |
-| Query and Log Analysis | Kusto Query Language (KQL) |
-| Infrastructure | Active Directory, Windows Server Administration |
+The workflow used in these playbooks was learned by building a repeatable lab process and following Microsoft security documentation step by step.
 
----
+### Click-by-Click Learning Process
 
-# Security Incident Investigation Dashboard
+1. Signed in to the Microsoft Azure portal.
 
-## Investigation Summary
+2. Opened **Microsoft Sentinel** from the Azure portal search bar.
 
-| Metric | Value |
-|:------|------:|
-| Total Cases | 7 |
-| Critical Severity Incidents | 2 |
-| High Severity Incidents | 3 |
-| Medium Severity Incidents | 1 |
-| Resolved Investigations | 7 |
-| Open Investigations | 0 |
+3. Selected the lab workspace used for investigation practice.
 
----
+4. Opened **Logs** inside Microsoft Sentinel.
 
-## Detection Coverage
+5. Reviewed available log tables such as **SigninLogs** and other authentication-related records.
 
-These investigations simulate identity-based attack scenarios mapped to the MITRE ATT&CK framework.
+6. Copied sample and custom **Kusto Query Language (KQL)** queries into the query editor.
 
-Initial Access  
-Credential Access  
-Defense Evasion  
-Persistence  
-Exfiltration  
+7. Ran queries to identify suspicious authentication activity such as repeated failures, unusual login locations, and excessive MFA prompts.
+
+8. Compared the query results to the simulated incident scenario to determine what activity appeared suspicious.
+
+9. Reviewed relevant **Microsoft Entra ID** sign-in activity and identity-related events to better understand the authentication behavior.
+
+10. Mapped the observed activity to the appropriate **MITRE ATT&CK technique** so the incident could be categorized using a recognized industry framework.
+
+11. Documented the investigation steps used to review the alert, validate the suspicious activity, and identify potential containment actions.
+
+12. Created remediation playbooks based on the repeated workflow used in the lab so each incident type followed a structured response process.
+
+This approach helped build familiarity with security investigation workflow, authentication log analysis, and documentation practices commonly used in Security Operations Center environments.
 
 ---
 
-## Security Investigation Cases
+## Playbook Dashboard
 
-| Case Identifier | Investigation | Severity | MITRE ATT&CK Technique | Status | Investigation Report |
-|:---------------|:--------------|:---------|:----------------------|:------|:---------------------|
-| CASE-001 | Password Spray Attack | High | T1110.003 Password Spraying | Resolved | [View Investigation](https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/case-files/case-001-password-spray.md) |
-| CASE-002 | Enterprise Identity Compromise | Critical | T1078 Valid Accounts | Resolved | [View Investigation](https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/case-files/case-002-identity-compromise.md) |
-| CASE-003 | MFA Fatigue Attack | High | T1621 Multi Factor Authentication Request Generation | Resolved | [View Investigation](https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/case-files/case-003-mfa-fatigue.md) |
-| CASE-004 | Impossible Travel Authentication | Medium | T1078 Valid Accounts | Resolved | [View Investigation](https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/case-files/case-004-impossible-travel.md) |
-| CASE-005 | Phishing Authentication Attempt | High | T1566 Phishing | Resolved | [View Investigation](https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/case-files/case-005-phishing-login.md) |
-| CASE-006 | Authentication Token Theft | High | T1528 Steal Application Access Token | Resolved | [View Investigation](https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/case-files/case-006-token-theft.md) |
-| CASE-007 | Data Exfiltration Activity | Critical | T1041 Exfiltration Over Command and Control Channel | Resolved | [View Investigation](https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/case-files/case-007-data-exfiltration.md) |
+| Playbook | Description | MITRE ATT&CK Technique | Playbook Link |
+|:---------|:-------------|:----------------------|:--------------|
+| Conditional Access Policy Block Remediation | Response procedures for blocking suspicious authentication activity using Conditional Access policies | Defense Evasion / Initial Access | [View Playbook](https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/playbooks/conditional-access-policy-block-remediation.md) |
+| Data Exfiltration Investigation Remediation | Investigation and remediation procedures for suspected data exfiltration activity | T1041 Exfiltration Over Command and Control Channel | [View Playbook](https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/playbooks/data-exfiltration-investigation-remediation.md) |
+| Identity Compromise Remediation | Response procedures for compromised user identities and unauthorized access | T1078 Valid Accounts | [View Playbook](https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/playbooks/identity-compromise-remediation.md) |
+| Impossible Travel Login Remediation | Investigation procedures for logins originating from geographically distant locations within a short timeframe | T1078 Valid Accounts | [View Playbook](https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/playbooks/impossible-travel-login-remediation.md) |
+| MFA Fatigue Attack Remediation | Investigation and mitigation procedures for repeated MFA authentication prompts | T1621 Multi Factor Authentication Request Generation | [View Playbook](https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/playbooks/mfa-fatigue-attack-incident-remediation.md) |
+| Password Spray Attack Remediation | Investigation and containment procedures for password spray authentication attempts | T1110.003 Password Spraying | [View Playbook](https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/playbooks/password-spray-attack-remediation.md) |
+| Phishing Attack Remediation | Investigation procedures for phishing-based authentication attempts targeting user credentials | T1566 Phishing | [View Playbook](https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/playbooks/phishing-attack-remediation.md) |
 
 ---
 
-# Detection Engineering
+## Documentation Sources
 
-Example detection logic used to identify identity-based threats within Microsoft Sentinel.
+The investigation procedures and response steps documented in this repository were learned through review of publicly available Microsoft security documentation and the MITRE ATT&CK framework.
 
-## Password Spray Detection
+### Primary Documentation Used
 
-MITRE ATT&CK Technique  
-T1110.003 Password Spraying
+Microsoft Sentinel Documentation  
+[Microsoft Sentinel Documentation](https://learn.microsoft.com/en-us/azure/sentinel/)
 
-```kql
-SecurityEvent
-| where EventID == 4625
-| summarize FailureCount = count() by Account, IpAddress, bin(TimeGenerated, 10m)
-| where FailureCount > 10
+Microsoft Entra ID Sign-in Log Documentation  
+[Microsoft Entra ID Sign-in Logs](https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-sign-ins)
+
+Kusto Query Language Documentation  
+[Kusto Query Language Documentation](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/)
+
+Microsoft Entra Conditional Access Documentation  
+[Microsoft Entra Conditional Access](https://learn.microsoft.com/en-us/entra/identity/conditional-access/)
+
+MITRE ATT&CK Enterprise Matrix  
+[MITRE ATT&CK Enterprise Matrix](https://attack.mitre.org/matrices/enterprise/)
+
+---
+
+## Why These Sources Were Used
+
+These references were used to learn:
+
+- how Microsoft security logs are collected and reviewed
+- how KQL is used to search and analyze authentication events
+- how Microsoft Sentinel supports alert investigation and response workflows
+- how Microsoft Entra ID records sign-in and identity-related activity
+- how MITRE ATT&CK techniques help classify attacker behavior
+
+This repository is intended as a hands-on learning project built in a controlled lab environment and does not represent production security operations experience.
