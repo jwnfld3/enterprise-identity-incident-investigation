@@ -1,41 +1,50 @@
-# Multi Factor Authentication Prompt Log
+# MFA Prompt Authentication Log
 
-This log represents Multi Factor Authentication prompt activity reviewed during an investigation of suspicious authentication attempts.
+## Overview
 
-Repeated MFA prompts may indicate an MFA fatigue attack, where an attacker repeatedly attempts to authenticate hoping the user accidentally approves the request.
+This log captures authentication activity involving repeated multi-factor authentication (MFA) prompts generated for a user account within the Microsoft 365 environment.
 
----
+MFA prompts occur when an additional authentication factor is required during the sign-in process. In some cases, attackers who possess valid credentials may attempt to trigger repeated MFA prompts in an attempt to convince the user to approve one of the requests.
 
-## MFA Authentication Events
+These authentication events were collected as supporting evidence during the investigation of suspicious login activity.
 
-| Timestamp (UTC) | User | Application | IP Address | Location | Authentication Method | Result |
-|-----------------|------|-------------|-----------|----------|----------------------|--------|
-| 2026-03-12 09:40 | jsmith@company.com | Microsoft 365 | 185.199.110.42 | Warsaw, Poland | Push Notification | Sent |
-| 2026-03-12 09:41 | jsmith@company.com | Microsoft 365 | 185.199.110.42 | Warsaw, Poland | Push Notification | Sent |
-| 2026-03-12 09:41 | jsmith@company.com | Microsoft 365 | 185.199.110.42 | Warsaw, Poland | Push Notification | Sent |
-| 2026-03-12 09:42 | jsmith@company.com | Microsoft 365 | 185.199.110.42 | Warsaw, Poland | Push Notification | Sent |
-| 2026-03-12 09:42 | jsmith@company.com | Microsoft 365 | 185.199.110.42 | Warsaw, Poland | Push Notification | Denied |
-| 2026-03-12 09:43 | jsmith@company.com | Microsoft 365 | 185.199.110.42 | Warsaw, Poland | Push Notification | Denied |
-| 2026-03-12 09:44 | jsmith@company.com | Microsoft 365 | 185.199.110.42 | Warsaw, Poland | Push Notification | Blocked |
+## Evidence Source
 
----
+Authentication activity was collected from Microsoft Entra ID Sign-in Logs.
 
-## Observations
+| Timestamp (UTC) | Username | Source IP | Location | MFA Prompt | Result |
+|-----------------|----------|-----------|----------|------------|--------|
+| 2026-03-15 07:10 | awalker@company.com | 185.33.12.19 | Poland | Sent | Denied |
+| 2026-03-15 07:11 | awalker@company.com | 185.33.12.19 | Poland | Sent | Denied |
+| 2026-03-15 07:12 | awalker@company.com | 185.33.12.19 | Poland | Sent | Denied |
 
-Multiple MFA prompts were triggered within a short time window.
+These events show multiple MFA prompts being generated within a short timeframe from the same external IP address.
 
-The authentication requests originated from a location outside the user's normal login pattern.
+## Click-by-Click Learning Process
 
-The user reported receiving unexpected authentication prompts.
+1. Signed in to the Microsoft Entra Admin Center.
+2. Navigated to **Identity**.
+3. Selected **Monitoring**.
+4. Opened **Sign-in Logs**.
+5. Filtered authentication activity for the affected user account.
+6. Reviewed sign-in events that required multi-factor authentication.
+7. Examined timestamps associated with each MFA challenge.
+8. Identified repeated MFA prompts originating from the same IP address.
+9. Reviewed geographic location information associated with the login attempts.
+10. Documented the authentication activity and preserved the logs as investigation evidence.
 
----
+## Related Case File
 
-## Security Controls Triggered
+Case 003 MFA Fatigue Investigation  
+https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/case-files/case-003-mfa-fatigue.md
 
-Multi Factor Authentication enforcement
+## Documentation Sources
 
-Sign in risk alert generated
+Microsoft Entra Sign-in Logs  
+https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-sign-ins
 
-Conditional Access policy triggered
+Microsoft Entra Multifactor Authentication Overview  
+https://learn.microsoft.com/en-us/entra/identity/authentication/concept-mfa-howitworks
 
-Account sign in temporarily blocked during investigation
+MITRE ATT&CK Credential Access Techniques  
+https://attack.mitre.org/
