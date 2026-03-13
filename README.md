@@ -1,4 +1,4 @@
-# Enterprise Identity Incident Investigation Lab
+# Enterprise Identity Incident Investigation
 
 This repository demonstrates how identity based security incidents can be detected, investigated, and remediated using Microsoft Sentinel, Microsoft Entra ID authentication logs, and MITRE ATT&CK techniques.
 
