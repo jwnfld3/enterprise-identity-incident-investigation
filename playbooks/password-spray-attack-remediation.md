@@ -219,3 +219,11 @@ Attackers may retry the same technique after initial failures. Continued monitor
 ## Resolution
 
 The password spray activity was identified through sign in log review, targeted accounts were documented, suspicious source activity was reviewed, appropriate account protections were applied, and monitoring was increased to confirm the attack stopped.
+
+### Documentation Sources
+
+Microsoft Password Spray Attack Detection  
+https://learn.microsoft.com/en-us/security/operations/password-spray
+
+MITRE ATT&CK Password Spraying  
+https://attack.mitre.org/techniques/T1110/003/
