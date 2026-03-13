@@ -1,43 +1,47 @@
-# Authentication Sign In Log
+# Microsoft 365 Sign-in Authentication Log
 
-This log represents authentication activity reviewed during the investigation of suspicious login attempts within the Microsoft Entra ID environment.
+## Overview
 
-The following events were extracted from authentication monitoring logs during the investigation period.
+This log records authentication activity observed within the Microsoft 365 environment during security monitoring operations.
 
----
+Sign-in logs provide detailed information about authentication events including the user account, IP address, application accessed, device information, and authentication results.
 
-## Sign In Activity
+Security analysts review these logs to identify suspicious login behavior, failed authentication attempts, and unusual access patterns that may indicate credential compromise or unauthorized access.
 
-| Timestamp (UTC) | User | Application | IP Address | Location | Device | Status |
-|-----------------|------|-------------|-----------|----------|--------|--------|
-| 2026-03-10 08:11 | jsmith@company.com | Microsoft 365 | 73.142.55.20 | Seattle, USA | Windows 11 | Success |
-| 2026-03-10 08:14 | jsmith@company.com | Outlook Online | 73.142.55.20 | Seattle, USA | Windows 11 | Success |
-| 2026-03-10 08:52 | jsmith@company.com | Microsoft Teams | 73.142.55.20 | Seattle, USA | Windows 11 | Success |
-| 2026-03-10 09:10 | jsmith@company.com | SharePoint Online | 185.199.110.42 | Warsaw, Poland | Unknown | Failure |
-| 2026-03-10 09:11 | jsmith@company.com | Microsoft 365 | 185.199.110.42 | Warsaw, Poland | Unknown | Failure |
-| 2026-03-10 09:11 | jsmith@company.com | Microsoft 365 | 185.199.110.42 | Warsaw, Poland | Unknown | Failure |
-| 2026-03-10 09:12 | jsmith@company.com | Microsoft 365 | 185.199.110.42 | Warsaw, Poland | Unknown | MFA Challenge |
-| 2026-03-10 09:13 | jsmith@company.com | Microsoft 365 | 185.199.110.42 | Warsaw, Poland | Unknown | Blocked |
-| 2026-03-10 09:16 | jsmith@company.com | Microsoft 365 | 73.142.55.20 | Seattle, USA | Windows 11 | Success |
+## Evidence Source
 
----
+Authentication activity was collected from Microsoft Entra ID Sign-in Logs.
 
-## Observations
+| Timestamp (UTC) | Username | Source IP | Location | Application | Result |
+|-----------------|----------|-----------|----------|-------------|--------|
+| 2026-03-15 02:05 | jsmith@company.com | 44.21.101.5 | United States | Microsoft 365 | Success |
+| 2026-03-15 02:08 | jsmith@company.com | 44.21.101.5 | United States | Microsoft 365 | Success |
+| 2026-03-15 02:12 | mgarcia@company.com | 77.91.33.10 | Poland | Microsoft 365 | Failure |
 
-A series of authentication attempts originated from a foreign IP address not previously associated with the user account.
+These authentication records provide evidence of both successful and failed login attempts that may require further investigation.
 
-The login attempts occurred shortly after normal activity from the user’s known device and location.
+## Click-by-Click Learning Process
 
-Multiple failed login attempts triggered a security monitoring alert.
+1. Signed in to the Microsoft Entra Admin Center.
+2. Navigated to Identity.
+3. Selected Monitoring.
+4. Opened Sign-in Logs.
+5. Filtered authentication events by time range.
+6. Reviewed user account login activity.
+7. Identified IP addresses associated with login attempts.
+8. Examined geographic location information.
+9. Reviewed authentication results for each login attempt.
+10. Documented relevant authentication activity for investigation.
 
----
+## Related Case File
 
-## Security Controls Triggered
+Case 002 Identity Compromise Investigation  
+https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/case-files/case-002-identity-compromise.md
 
-Multi Factor Authentication challenge
+## Documentation Sources
 
-Conditional Access location restriction
+Microsoft Entra Sign-in Logs Documentation  
+https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-sign-ins
 
-Sign in risk alert generated
-
-Suspicious authentication activity flagged for investigation
+Microsoft Entra Monitoring and Logs  
+https://learn.microsoft.com/en-us/entra/identity/monitoring-health/
