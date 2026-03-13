@@ -1,4 +1,4 @@
-# Microsoft 365 Sign-in Authentication Log
+# Impossible Travel Authentication Log
 
 ## Overview
 
