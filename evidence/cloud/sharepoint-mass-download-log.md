@@ -1,33 +1,47 @@
-# SharePoint Mass Download Alert Log
+# SharePoint Mass Download Activity Log
 
-This log represents activity detected during a SharePoint mass download investigation.
+## Overview
 
-Mass file downloads may indicate potential data exfiltration or unauthorized data access.
+This log captures activity associated with a large number of files downloaded from Microsoft SharePoint within a short timeframe.
 
----
+Mass download events may indicate data exfiltration attempts following account compromise or unauthorized access to organizational data.
 
-## File Access Activity
+These logs were collected as evidence during the investigation of suspicious SharePoint file access.
 
-| Timestamp (UTC) | User | Application | Files Accessed | Result |
-|-----------------|------|-------------|----------------|--------|
-| 2026-03-21 10:05 | jsmith@company.com | SharePoint Online | 5 files | Success |
-| 2026-03-21 10:07 | jsmith@company.com | SharePoint Online | 85 files | Success |
-| 2026-03-21 10:09 | jsmith@company.com | SharePoint Online | 142 files | Success |
+## Evidence Source
 
----
+File activity was collected from Microsoft 365 audit logs.
 
-## Observations
+| Timestamp (UTC) | Username | Operation | Site | Source IP |
+|-----------------|----------|-----------|------|-----------|
+| 2026-03-15 09:31 | jsmith@company.com | FileDownloaded | Finance-Site | 173.22.14.19 |
+| 2026-03-15 09:32 | jsmith@company.com | FileDownloaded | Finance-Site | 173.22.14.19 |
+| 2026-03-15 09:33 | jsmith@company.com | FileDownloaded | Finance-Site | 173.22.14.19 |
 
-A significant increase in file downloads occurred within a short time window.
+The activity shows repeated file downloads from the same SharePoint site within a short period of time.
 
-This behavior deviates from the user's normal SharePoint activity patterns.
+## Click-by-Click Learning Process
 
----
+1. Opened the Microsoft 365 Defender portal.
+2. Navigated to Audit Logs.
+3. Filtered results for SharePoint file operations.
+4. Reviewed events associated with FileDownloaded operations.
+5. Identified the user account performing the downloads.
+6. Reviewed timestamps for download activity.
+7. Examined the SharePoint site involved.
+8. Identified the source IP address associated with the downloads.
+9. Determined whether the activity represented mass file access.
+10. Documented the activity and preserved the logs as evidence.
 
-## Security Controls Triggered
+## Related Case File
 
-Unusual file activity alert
+Case 007 Data Exfiltration Investigation  
+https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/case-files/case-007-data-exfiltration.md
 
-Cloud security monitoring alert
+## Documentation Sources
 
-Security investigation initiated
+Microsoft SharePoint Activity Monitoring  
+https://learn.microsoft.com/en-us/microsoft-365/compliance/audit-log-search
+
+Microsoft Defender for Cloud Apps  
+https://learn.microsoft.com/en-us/defender-cloud-apps/
