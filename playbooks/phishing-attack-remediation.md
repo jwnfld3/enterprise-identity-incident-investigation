@@ -254,3 +254,11 @@ A phishing incident involving one user may indicate that other users were also t
 ## Resolution
 
 The phishing attack was investigated by reviewing the suspicious email, examining sign in activity, checking mailbox rules, resetting credentials, revoking sessions, removing unauthorized mailbox changes, blocking malicious senders, and completing post incident awareness and filtering review.
+
+### Documentation Sources
+
+Microsoft Defender for Office 365 Phishing Investigation  
+https://learn.microsoft.com/en-us/defender-office-365/anti-phishing
+
+Microsoft Phishing Attack Guidance  
+https://learn.microsoft.com/en-us/security/operations/phishing-investigation
