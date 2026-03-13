@@ -206,3 +206,11 @@ Monitoring after remediation helps verify that the attacker no longer has access
 ## Resolution
 
 The affected account was secured by reviewing suspicious sign in activity, confirming repeated MFA prompts, resetting the password, revoking active sessions, requiring MFA re registration, and reviewing Conditional Access protections.
+
+### Documentation Sources
+
+Microsoft MFA Security Guidance  
+https://learn.microsoft.com/en-us/entra/identity/authentication/concept-mfa-howitworks
+
+Microsoft MFA Number Matching  
+https://learn.microsoft.com/en-us/entra/identity/authentication/how-to-mfa-number-match
