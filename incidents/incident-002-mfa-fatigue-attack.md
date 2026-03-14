@@ -1,10 +1,58 @@
+# Incident Report: MFA Fatigue Attack
+
+## Case Metadata
+
+Incident ID: IR-002  
+Category: Identity Security Incident  
+Severity: High  
+Status: Resolved  
+
+Detection Source: Microsoft Entra ID Sign-in Monitoring  
+Reported By: User Security Alert  
+
+Investigation Start Time: 2026-03-12 09:40 UTC  
+Investigation End Time: 2026-03-12 10:20 UTC  
+
+Affected User: jsmith@company.com  
+Affected System: Microsoft 365  
+
+---
+
+## Incident Summary
+
+A suspected Multi Factor Authentication (MFA) fatigue attack was identified targeting a Microsoft 365 user account.
+
+The user reported receiving multiple unexpected authentication prompts on their mobile device within a short time period. Security monitoring confirmed repeated login attempts originating from a foreign IP address.
+
+MFA prompts were repeatedly sent to the user in an attempt to trick the user into approving the authentication request.
+
+---
+
+## Detection
+
+The incident was detected through a combination of user reporting and automated authentication monitoring.
+
+Indicators included:
+
+- Multiple MFA push notifications sent within a short time period
+- Login attempts originating from an unfamiliar geographic location
+- Repeated authentication failures followed by MFA challenges
+
+---
+
+## Investigation
+
+### Step 1 – Review MFA Authentication Logs
+
+Security investigators reviewed Multi Factor Authentication activity logs.
+
 Evidence source: Microsoft Entra ID Sign-in Logs
 
-Investigators reviewed authentication telemetry to analyze the pattern of login attempts associated with the affected user account.
+Investigators analyzed authentication telemetry including login timestamps, IP addresses, device information, and geographic location data.
 
-Log analysis confirmed repeated authentication attempts originating from an unfamiliar IP address. Each login attempt triggered a Multi Factor Authentication push notification sent to the user’s registered device.
+Log analysis confirmed repeated authentication attempts originating from an unfamiliar IP address associated with a foreign geographic region. Each login attempt triggered an MFA push notification sent to the user’s registered device.
 
-The repeated authentication attempts occurred within a short time interval, which is a behavior commonly associated with MFA fatigue attacks.
+The repeated authentication attempts occurred within a short time interval, which is behavior commonly associated with MFA fatigue attacks.
 
 ---
 
