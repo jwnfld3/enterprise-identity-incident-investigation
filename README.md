@@ -118,6 +118,8 @@ Examples referenced in this project include:
 
 Mapping investigation scenarios to MITRE ATT&CK techniques helps analysts understand attacker behavior and improve detection coverage.
 
+
+<sub>Back to [Quick Navigation](#quick-navigation)</sub>
 ---
 
 # Kusto Query Language
