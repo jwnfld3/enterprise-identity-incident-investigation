@@ -1,269 +1,141 @@
 # Enterprise Identity Incident Investigation
 
-![Microsoft Sentinel](https://img.shields.io/badge/Microsoft-Sentinel-0078D4?logo=microsoftazure&logoColor=white)
-![Microsoft Entra ID](https://img.shields.io/badge/Microsoft-Entra%20ID-5C2D91?logo=microsoft&logoColor=white)
-![Microsoft 365](https://img.shields.io/badge/Microsoft-365-D83B01?logo=microsoftoffice&logoColor=white)
+![Microsoft Entra ID](https://img.shields.io/badge/Microsoft-Entra%20ID-purple)
+![Microsoft Sentinel](https://img.shields.io/badge/Microsoft-Sentinel-blue)
+![Kusto Query Language](https://img.shields.io/badge/KQL-Log%20Analysis-green)
+![MITRE ATT&CK](https://img.shields.io/badge/MITRE-ATT%26CK-black)
+![Incident Response](https://img.shields.io/badge/SOC-Incident%20Response-orange)
 
-![Kusto Query Language](https://img.shields.io/badge/KQL-Query%20Language-blue)
-![MITRE ATT&CK](https://img.shields.io/badge/MITRE-ATT%26CK-red)
+This repository demonstrates enterprise identity security incident investigations using Microsoft Entra ID authentication logs, SOC investigation methodology, and structured incident response procedures.
 
-![SIEM](https://img.shields.io/badge/SIEM-Security%20Monitoring-darkblue)
-![Blue Team](https://img.shields.io/badge/Blue-Team%20Operations-darkgreen)
-![Incident Response](https://img.shields.io/badge/Incident-Response-purple)
-![Cybersecurity](https://img.shields.io/badge/Cybersecurity-SOC%20Investigation-darkred)
-
-This repository demonstrates how identity based security incidents can be detected, investigated, and remediated using Microsoft Sentinel, Microsoft Entra ID authentication logs, and MITRE ATT&CK techniques.
-
-The project simulates the investigation workflow used by Security Operations Center (SOC) analysts when responding to identity security alerts in Microsoft cloud environments.
-
-The scenarios documented in this repository include authentication attacks, credential compromise activity, suspicious login patterns, and potential data exfiltration behavior.
+The investigation scenarios documented in this repository simulate real world Security Operations Center workflows used to analyze authentication anomalies, identify indicators of compromise, and apply remediation actions within Microsoft cloud environments.
 
 ---
 
-## Quick Navigation
+# Quick Navigation
 
 | Section | Description |
-|--------|-------------|
-| 🔍 **[Investigation Workflow](#investigation-workflow)** | Overview of the SOC investigation process used in this project |
-| 🧠 **[MITRE ATT&CK Techniques](#mitre-attck-techniques)** | Mapping suspicious activity to attacker tactics and techniques |
-| 📊 **[Kusto Query Language](#kusto-query-language)** | Using KQL to analyze authentication logs and detect threats |
-| 📚 **[Investigation Learning Process](#investigation-learning-process)** | How the investigation workflow was learned in the lab environment |
-| 🛡 **[Incident Response Playbooks](#incident-response-playbooks)** | Structured remediation procedures for simulated security incidents |
-| 📖 **[Documentation Sources](#documentation-sources)** | Microsoft documentation and security frameworks used |
-| ⚙ **[Project Transparency](#project-transparency)** | Explanation of the simulated lab environment |
+|---|---|
+| Investigation Scenarios | Security incidents analyzed in this repository |
+| Incident Response Playbooks | Remediation procedures for identity related attacks |
+| Investigation Methodology | SOC investigation workflow used during analysis |
+| Detection Queries | Example KQL queries used to identify suspicious activity |
+| Documentation Sources | Vendor documentation and security references |
 
 ---
 
-# Investigation Methodology
-
-The investigation procedures and response playbooks documented in this repository were developed through hands on practice in a controlled lab environment while studying Microsoft security documentation and the MITRE ATT&CK framework.
-
-The objective of this project was to understand how Security Operations Center analysts investigate identity based alerts using Microsoft Sentinel and Microsoft Entra ID authentication telemetry.
-
-The investigation process focuses on authentication log analysis, identification of suspicious login behavior, event correlation, and documentation of remediation procedures.
-
----
-
-## Investigation Workflow
-
-This repository is organized to simulate the investigation workflow used by Security Operations Center teams when responding to identity based security alerts.
-
-The investigation process follows four primary stages.
-
-| Stage | Description |
-|------|-------------|
-| Detection | Security monitoring queries identify suspicious authentication activity using Microsoft Sentinel and KQL. |
-| Evidence Collection | Authentication logs and related telemetry are collected to understand the scope of the activity. |
-| Investigation | Analysts review authentication patterns and identify indicators of suspicious behavior. |
-| Incident Response | Remediation procedures are documented as structured incident response playbooks. |
-
-These stages represent the typical workflow used by SOC analysts when investigating authentication related alerts in enterprise Microsoft cloud environments.
-
-<sub>Back to [Quick Navigation](#quick-navigation)</sub>
----
-
-## Detection
-
-Security monitoring queries identify suspicious authentication activity using Microsoft Sentinel and Kusto Query Language.
-
-These queries analyze telemetry from sources including:
-
-- Microsoft Entra ID Sign in Logs  
-- Microsoft 365 Activity Logs  
-- OfficeActivity telemetry  
-- SecurityEvent logs  
-
-These detections simulate the types of alerts generated by enterprise SIEM platforms.
-
----
-
-## Evidence Collection
-
-Once suspicious activity is detected, relevant authentication and system activity is collected and documented as supporting evidence.
-
-Examples of evidence collected include:
-
-- authentication logs  
-- cloud file activity  
-- multi factor authentication events  
-- conditional access policy evaluation results  
-- suspicious IP login attempts  
-
-These artifacts help analysts understand the behavior associated with each simulated incident.
-
----
-
-## Investigation Case Files
-
-Each incident scenario is documented as a structured investigation case file.
-
-The case files describe:
-
-- the security alert that triggered the investigation  
-- authentication evidence collected  
-- indicators of suspicious behavior  
-- investigative steps performed  
-
-These case files simulate documentation practices commonly used by SOC analysts during incident response investigations.
-
----
-
-## Incident Response
-
-After completing the investigation, remediation procedures are documented as structured incident response playbooks.
-
-These playbooks describe containment and mitigation procedures used to respond to identity based attacks.
-
----
-
-# MITRE ATT&CK Techniques
-
-The MITRE ATT&CK framework is a publicly available knowledge base that documents attacker tactics and techniques observed in real world cyber incidents.
-
-Security teams use ATT&CK techniques to classify suspicious behavior and understand where an attacker may be in the attack lifecycle.
-
-Examples referenced in this project include:
-
-| Technique | Description |
-|-----------|-------------|
-| T1110.003 Password Spraying | Attackers attempt a small set of passwords across many accounts to avoid account lockouts |
-| T1078 Valid Accounts | Attackers authenticate using compromised credentials |
-| T1621 Multi Factor Authentication Request Generation | Attackers repeatedly trigger MFA prompts hoping a user approves one |
-| T1041 Exfiltration Over Command and Control Channel | Attackers transfer sensitive data outside the environment |
-
-Mapping investigation scenarios to MITRE ATT&CK techniques helps analysts understand attacker behavior and improve detection coverage.
-
-
-<sub>Back to [Quick Navigation](#quick-navigation)</sub>
----
-
-# Kusto Query Language
-
-Microsoft Sentinel and Azure Log Analytics use **Kusto Query Language (KQL)** to analyze security telemetry.
-
-KQL allows analysts to:
-
-- search authentication logs  
-- identify suspicious login patterns  
-- correlate events across users and IP addresses  
-- investigate alerts and develop detection logic  
-
-Security analysts rely on KQL to investigate identity security alerts and perform threat hunting within Microsoft cloud environments.
-
-<sub>Back to [Quick Navigation](#quick-navigation)</sub>
----
-
-## Investigation Learning Process
-
-The investigation workflow used in this project was learned through studying Microsoft Sentinel documentation and performing hands on log analysis within a simulated lab environment.
-
-The objective was to understand how Security Operations Center analysts investigate authentication related security alerts using Microsoft Sentinel and Microsoft Entra ID authentication telemetry.
-
-This process involved developing detection queries, reviewing authentication logs, identifying suspicious login behavior, and mapping the activity to known MITRE ATT&CK techniques.
-
-### Click by Click Investigation Workflow
-
-1. Sign in to the Microsoft Azure Portal.
-2. Search for **Microsoft Sentinel** in the Azure portal search bar.
-3. Open the Sentinel workspace used for the lab environment.
-4. Select **Logs** from the Sentinel navigation menu.
-5. Review available log tables including:
-
-   - SigninLogs  
-   - SecurityEvent  
-   - AuditLogs  
-
-6. Enter KQL queries into the Sentinel query editor.
-7. Select **Run** to execute the query.
-8. Review authentication activity returned in the query results.
-9. Identify suspicious patterns such as:
-
-   - repeated login failures  
-   - authentication attempts from unusual geographic locations  
-   - repeated MFA prompts  
-
-10. Compare the results with the simulated attack scenario.
-11. Map the observed activity to the appropriate **MITRE ATT&CK technique**.
-12. Document the investigation findings and remediation procedures.
-
-This workflow reflects the process commonly used by Security Operations Center analysts when investigating identity related security alerts.
-
-<sub>Back to [Quick Navigation](#quick-navigation)</sub>
-
-## Click by Click Investigation Workflow
-
-1. Sign in to the Microsoft Azure Portal  
-2. Search for Microsoft Sentinel in the Azure portal search bar  
-3. Open the Sentinel workspace used for the lab environment  
-4. Select Logs from the Sentinel navigation menu  
-5. Review available log tables including  
-
-   - SigninLogs  
-   - SecurityEvent  
-   - AuditLogs  
-
-6. Enter KQL queries into the Sentinel query editor  
-7. Select Run to execute the query  
-8. Review authentication activity returned by the query results  
-9. Identify suspicious patterns such as  
-
-   - repeated login failures  
-   - authentication attempts from unusual geographic locations  
-   - repeated MFA prompts  
-
-10. Compare the results with the simulated attack scenario  
-11. Map the observed activity to the appropriate MITRE ATT&CK technique  
-12. Document the investigation process and remediation steps as structured incident response playbooks  
+# Investigation Scenarios
+
+| Case ID | Incident | Description | Investigation Link |
+|---|---|---|---|
+| INC-001 | Suspicious Authentication Activity | Investigation of abnormal login attempts detected in Microsoft Entra ID sign-in logs | [View Investigation](incidents/incident-001-suspicious-authentication-activity.md) |
+| INC-002 | MFA Fatigue Attack | Investigation of repeated MFA prompts attempting to bypass authentication protections | [View Investigation](incidents/incident-002-mfa-fatigue-attack.md) |
+| INC-003 | Impossible Travel Login | Investigation of authentication attempts from geographically distant locations | [View Investigation](incidents/incident-003-impossible-travel-login.md) |
+| INC-004 | Disabled Account Authentication | Investigation of login attempts targeting a disabled user account | [View Investigation](incidents/incident-004-disabled-account-authentication.md) |
+| INC-005 | Conditional Access Policy Block | Investigation of authentication attempts blocked by Conditional Access policies | [View Investigation](incidents/incident-005-conditional-access-policy-block.md) |
+| INC-006 | Password Spray Attack | Investigation of repeated authentication attempts targeting multiple user accounts | [View Investigation](incidents/incident-006-password-spray-attack.md) |
+| INC-007 | Data Exfiltration Activity | Investigation of suspicious activity suggesting potential data exfiltration | [View Investigation](incidents/incident-007-data-exfiltration-activity.md) |
+| INC-008 | Identity Account Compromise | Investigation of authentication activity suggesting compromised user credentials | [View Investigation](incidents/incident-008-identity-account-compromise.md) |
+| INC-009 | Phishing Attack | Investigation of authentication attempts associated with phishing activity | [View Investigation](incidents/incident-009-phishing-attack.md) |
 
 ---
 
 # Incident Response Playbooks
 
 | Playbook | Description | Playbook Link |
-|----------|-------------|--------------|
-| Conditional Access Policy Block Remediation | Procedures for blocking suspicious authentication activity using Conditional Access policies | https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/playbooks/conditional-access-policy-block-remediation.md |
-| Data Exfiltration Investigation Remediation | Investigation and remediation procedures for suspected data exfiltration activity | https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/playbooks/data-exfiltration-investigation-remediation.md |
-| Identity Compromise Remediation | Response procedures for compromised user identities and unauthorized access | https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/playbooks/identity-compromise-remediation.md |
-| Impossible Travel Login Remediation | Investigation procedures for logins originating from geographically distant locations | https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/playbooks/impossible-travel-login-remediation.md |
-| MFA Fatigue Attack Remediation | Investigation and mitigation procedures for repeated MFA authentication prompts | https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/playbooks/mfa-fatigue-attack-incident-remediation.md |
-| Password Spray Attack Remediation | Investigation and containment procedures for password spray authentication attempts | https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/playbooks/password-spray-attack-remediation.md |
-| Phishing Attack Remediation | Investigation procedures for phishing based authentication attempts | https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/playbooks/phishing-attack-remediation.md |
-
-<sub>Back to [Quick Navigation](#quick-navigation)</sub>
----
-
-# Documentation Sources
-
-The investigation techniques and remediation procedures documented in this repository were developed through review of publicly available cybersecurity documentation and official vendor guidance.
-
-### Microsoft Security Documentation
-
-Microsoft Sentinel Documentation  
-https://learn.microsoft.com/en-us/azure/sentinel/
-
-Microsoft Entra ID Sign in Log Documentation  
-https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-sign-ins
-
-Kusto Query Language Documentation  
-https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/
-
-Microsoft Entra Conditional Access Documentation  
-https://learn.microsoft.com/en-us/entra/identity/conditional-access/
-
-<sub>Back to [Quick Navigation](#quick-navigation)</sub>
----
-
-### MITRE ATT&CK Framework
-
-MITRE ATT&CK Enterprise Matrix  
-https://attack.mitre.org/matrices/enterprise/
+|---|---|---|
+| Conditional Access Policy Block Remediation | Procedures for blocking suspicious authentication activity using Conditional Access policies | [View Playbook](playbooks/conditional-access-policy-block-remediation.md) |
+| Data Exfiltration Investigation Remediation | Investigation and remediation procedures for suspected data exfiltration activity | [View Playbook](playbooks/data-exfiltration-investigation-remediation.md) |
+| Identity Compromise Remediation | Response procedures for compromised user identities and unauthorized access | [View Playbook](playbooks/identity-compromise-remediation.md) |
+| Impossible Travel Login Remediation | Investigation procedures for logins originating from geographically distant locations | [View Playbook](playbooks/impossible-travel-login-remediation.md) |
+| MFA Fatigue Attack Remediation | Investigation and mitigation procedures for repeated MFA authentication prompts | [View Playbook](playbooks/mfa-fatigue-attack-incident-remediation.md) |
+| Password Spray Attack Remediation | Investigation and containment procedures for password spray authentication attempts | [View Playbook](playbooks/password-spray-attack-remediation.md) |
+| Phishing Attack Remediation | Investigation procedures for phishing related authentication attempts | [View Playbook](playbooks/phishing-attack-remediation.md) |
 
 ---
 
-# Project Transparency
+# Investigation Methodology
 
-All investigations and remediation procedures documented in this repository were performed in a simulated lab environment for educational purposes.
+The investigation procedures documented in this repository follow a structured Security Operations Center workflow used to analyze identity security alerts within enterprise environments.
 
-The project demonstrates investigation methodology, authentication log analysis, and documentation practices commonly used within Security Operations Center environments.
+SOC analysts typically follow a consistent investigative process when responding to suspicious authentication activity.
 
-<sub>Back to [Quick Navigation](#quick-navigation)</sub>
+Alert Detection  
+Security alerts are generated by monitoring platforms such as Microsoft Entra ID Identity Protection or Microsoft Sentinel when abnormal authentication behavior is detected.
+
+Log Analysis  
+Authentication telemetry is analyzed using Microsoft Entra ID sign-in logs to identify suspicious login patterns, unusual locations, or abnormal authentication methods.
+
+Threat Correlation  
+Security events are correlated across authentication logs, directory audit logs, and security monitoring platforms to determine the scope of the incident.
+
+Threat Identification  
+Analysts evaluate whether the activity represents legitimate user behavior, administrative activity, or potential attacker activity.
+
+Containment and Remediation  
+Security controls such as Conditional Access policies, credential resets, and session revocation are implemented to prevent unauthorized access.
+
+Documentation and Reporting  
+All investigation findings are documented to support incident response records and future detection improvements.
+
+---
+
+# Detection Queries
+
+Security analysts often use log queries to identify suspicious authentication behavior during investigations.
+
+Example query identifying authentication failures:
+
+```kql
+SigninLogs
+| where ResultType != 0
+| summarize FailureCount = count() by IPAddress, UserPrincipalName
+| where FailureCount > 10
+| order by FailureCount desc
+
+```
+## Documentation Sources
+
+The investigation procedures and remediation strategies documented in this repository were developed through review of publicly available cybersecurity research, vendor security documentation, and industry threat intelligence frameworks.
+
+These resources were used to better understand authentication monitoring, identity threat detection, incident response procedures, and enterprise security controls within Microsoft cloud environments.
+
+The following documentation sources were referenced during the investigation process.
+
+- **Microsoft Sentinel Documentation**  
+  https://learn.microsoft.com/en-us/azure/sentinel/
+
+- **Microsoft Entra ID Sign-in Logs Documentation**  
+  https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-sign-ins
+
+- **Kusto Query Language Documentation**  
+  https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/
+
+- **Microsoft Entra Conditional Access Documentation**  
+  https://learn.microsoft.com/en-us/entra/identity/conditional-access/
+
+- **Microsoft Defender Security Documentation**  
+  https://learn.microsoft.com/en-us/defender/
+
+- **MITRE ATT&CK Framework**  
+  https://attack.mitre.org/
+
+  ---
+
+  ## Analyst Learning Outcomes
+
+The investigation scenarios documented in this repository provided practical insight into how identity related security incidents are analyzed and remediated within enterprise environments.
+
+Through these investigations, several important security concepts became clearer.
+
+Authentication telemetry provides valuable visibility into user activity across enterprise systems. By analyzing sign-in logs, analysts can detect abnormal login patterns such as impossible travel events, repeated authentication failures, and login attempts originating from unfamiliar locations.
+
+Security monitoring platforms play a critical role in detecting potential threats. Tools such as Microsoft Sentinel and Microsoft Entra ID Identity Protection generate alerts when suspicious authentication behavior is detected, allowing analysts to quickly begin investigating potential incidents.
+
+Correlation of multiple security events is essential for understanding the scope of an incident. Authentication logs, directory audit logs, and security alerts must be analyzed together to determine whether suspicious activity represents a single isolated event or part of a broader attack.
+
+Identity security controls such as Conditional Access policies and multi-factor authentication significantly reduce the likelihood of successful credential abuse. In several investigation scenarios documented in this repository, Conditional Access policies successfully blocked suspicious authentication attempts before unauthorized access occurred.
+
+Effective incident response requires both technical analysis and structured documentation. Maintaining clear investigation records, documenting indicators of compromise, and outlining remediation actions helps organizations improve detection capabilities and strengthen overall security posture.
+
+These investigations demonstrate the importance of continuous monitoring, proactive threat detection, and structured incident response procedures in protecting enterprise identity systems.
