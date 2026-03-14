@@ -38,11 +38,20 @@ The investigation process focuses on authentication log analysis, identification
 
 ---
 
-# Investigation Workflow
+## Investigation Workflow
 
 This repository is organized to simulate the investigation workflow used by Security Operations Center teams when responding to identity based security alerts.
 
 The investigation process follows four primary stages.
+
+| Stage | Description |
+|------|-------------|
+| Detection | Security monitoring queries identify suspicious authentication activity using Microsoft Sentinel and KQL. |
+| Evidence Collection | Authentication logs and related telemetry are collected to understand the scope of the activity. |
+| Investigation | Analysts review authentication patterns and identify indicators of suspicious behavior. |
+| Incident Response | Remediation procedures are documented as structured incident response playbooks. |
+
+These stages represent the typical workflow used by SOC analysts when investigating authentication related alerts in enterprise Microsoft cloud environments.
 
 <sub>Back to [Quick Navigation](#quick-navigation)</sub>
 ---
