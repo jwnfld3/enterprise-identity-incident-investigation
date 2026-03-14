@@ -1,13 +1,23 @@
-# Identity Compromise Incident Report
+# Incident Report: Identity Compromise
 
-**Incident Type:** Identity Compromise  
-**Severity:** Critical  
-**Platform:** Microsoft Entra ID / Microsoft 365  
-**MITRE ATT&CK Techniques:** T1078 Valid Accounts, T1110.003 Password Spraying, T1528 Steal Application Access Token  
+## Case Metadata
+
+Incident ID: IR-008  
+Category: Identity Compromise  
+Severity: Critical  
+Status: Contained  
+
+Detection Source: Microsoft Sentinel / Microsoft Entra ID Sign-in Monitoring  
+Reported By: Automated Security Alert  
+
+Affected User: jsmith@company.com  
+Affected Systems: Microsoft Entra ID, Microsoft 365  
+
+MITRE ATT&CK Techniques: T1078 Valid Accounts, T1110.003 Password Spraying, T1528 Steal Application Access Token  
 
 ---
 
-# Incident Overview
+## Incident Summary
 
 An identity compromise incident was identified after suspicious authentication activity was detected within the Microsoft Entra ID environment. Security monitoring systems flagged abnormal login behavior involving multiple failed authentication attempts followed by a successful login from an unfamiliar IP address.
 
@@ -15,7 +25,7 @@ Initial investigation indicated that an attacker likely obtained valid user cred
 
 ---
 
-# Detection
+## Detection
 
 The incident was detected through authentication monitoring and SIEM analysis within Microsoft Sentinel.
 
@@ -30,10 +40,10 @@ These indicators suggested a possible credential based attack.
 
 ---
 
-# Timeline of Events
+## Timeline of Events
 
-| Time | Event |
-|-----|------|
+| Time (UTC) | Event |
+|---|---|
 | 08:12 | Multiple failed login attempts detected |
 | 08:14 | Authentication attempts from external IP address |
 | 08:16 | Successful login recorded |
@@ -45,7 +55,7 @@ These indicators suggested a possible credential based attack.
 
 ---
 
-# Indicators of Compromise
+## Indicators of Compromise
 
 The following indicators were identified during the investigation.
 
@@ -69,84 +79,125 @@ Shortly after successful authentication, the account initiated cloud activity in
 
 ---
 
-# Investigation Steps
+## Investigation
 
-Security analysts performed the following actions during the investigation.
+### Step 1 – Review Authentication Logs
 
-1. Reviewed Microsoft Entra ID sign-in logs.
-2. Identified abnormal authentication patterns.
-3. Verified login locations and IP reputation.
-4. Reviewed user activity within Microsoft 365 services.
-5. Cross referenced the suspicious IP address with threat intelligence databases.
-6. Confirmed the activity was inconsistent with normal user behavior.
+Security investigators reviewed Microsoft Entra ID sign-in logs for the affected account.
 
-Threat intelligence sources indicated the IP address had previously been associated with credential attack activity.
+Evidence source: Microsoft Entra ID Sign-in Logs
+
+Authentication telemetry confirmed multiple failed login attempts followed by a successful login originating from an unfamiliar external IP address.
 
 ---
 
-# MITRE ATT&CK Mapping
+### Step 2 – Verify Login Location
 
-The incident behavior aligns with the following adversary techniques.
+Security analysts evaluated login location data associated with the authentication activity.
 
-| Technique | Description |
-|----------|-------------|
-| T1078 | Use of valid accounts to gain unauthorized access |
-| T1110.003 | Password spraying attack targeting multiple accounts |
-| T1528 | Theft or abuse of authentication tokens |
-
-These techniques are commonly used in identity based attacks targeting cloud services.
+The login originated from a geographic region inconsistent with the user’s normal login patterns.
 
 ---
 
-# Containment Actions
+### Step 3 – Review User Activity
 
-After confirming the compromise, the following containment actions were executed.
+Investigators reviewed Microsoft 365 activity logs to determine actions performed after the successful login.
 
-1. The affected user account password was reset.
-2. All active authentication sessions were revoked.
-3. The suspicious IP address was blocked through Conditional Access policies.
-4. Multi factor authentication was enforced for the affected account.
-5. The user's mailbox and cloud storage activity were reviewed for unauthorized access.
+Observed activity included:
+
+- File access activity within SharePoint
+- Mailbox interactions
+- Cloud resource access shortly after authentication
+
+---
+
+### Step 4 – Validate Threat Intelligence
+
+The suspicious IP address was evaluated against threat intelligence sources including:
+
+- AbuseIPDB
+- AlienVault OTX
+- Microsoft Security Intelligence
+
+Threat intelligence analysis indicated that the IP address had previously been associated with credential attack activity.
+
+---
+
+## Remediation
+
+The following containment and remediation actions were implemented to secure the affected account.
+
+- User account password reset
+- Active authentication sessions revoked
+- Suspicious IP address blocked using Conditional Access policies
+- Multi factor authentication enforced
+- User mailbox and cloud storage activity reviewed for unauthorized access
+- Security monitoring increased for additional suspicious authentication attempts
 
 These actions prevented further unauthorized access to enterprise systems.
 
 ---
 
-# Recovery Actions
+## MITRE ATT&CK Mapping
 
-Following containment, additional recovery actions were implemented.
-
-- The affected user was notified of the incident.
-- The user was instructed to update all credentials.
-- Authentication logs were monitored for continued suspicious activity.
-- Identity protection policies were reviewed and strengthened.
-
-No additional malicious activity was observed after remediation actions were completed.
+| Technique | ID | Description |
+|---|---|---|
+| Valid Accounts | T1078 | Use of legitimate credentials to gain unauthorized access |
+| Password Spraying | T1110.003 | Attempted authentication using common passwords across multiple accounts |
+| Steal Application Access Token | T1528 | Abuse or theft of authentication tokens for persistence |
 
 ---
 
-# Defensive Improvements
+## Lessons Learned
 
-To reduce the likelihood of similar incidents occurring in the future, the following security controls were recommended.
+This incident highlights the importance of continuous authentication monitoring and rapid incident response.
 
-- Enforce multi factor authentication for all users
-- Implement Conditional Access policies for risky locations
+Credential based attacks remain one of the most common methods used by attackers to gain unauthorized access to cloud environments.
+
+Early detection of suspicious login patterns allowed the security team to contain the compromise before significant damage occurred.
+
+---
+
+## Recommended Security Improvements
+
+The following defensive measures are recommended to reduce the likelihood of similar incidents.
+
+- Enforce Multi Factor Authentication for all users
+- Implement Conditional Access policies restricting risky login locations
 - Configure automated alerts for abnormal authentication behavior
 - Monitor authentication logs for credential attack patterns
 - Implement identity protection risk detection policies
 
 ---
 
-# Lessons Learned
+## Conclusion
 
-This incident highlights the importance of continuous authentication monitoring and rapid incident response. Credential based attacks remain one of the most common methods used by attackers to gain unauthorized access to cloud environments.
+The investigation confirmed that the suspicious authentication activity was the result of an identity compromise involving valid user credentials.
 
-Early detection of suspicious login patterns allowed the security team to contain the compromise before significant damage occurred.
+Rapid response actions including password reset, session revocation, and conditional access enforcement successfully contained the incident.
+
+Ongoing monitoring and improved identity security controls are recommended to strengthen the organization’s security posture against credential based attacks.
 
 ---
 
-# Conclusion
+## Documentation
 
-The investigation confirmed that the suspicious authentication activity was the result of an identity compromise involving valid user credentials. Rapid response actions including password reset, session revocation, and conditional access enforcement successfully contained the incident.
+The investigation techniques and remediation procedures documented in this incident report were developed through review of publicly available cybersecurity documentation and vendor guidance.
 
-Ongoing monitoring and improved identity security controls are recommended to strengthen the organization's security posture against credential based attacks.
+- **Microsoft Sentinel Documentation**  
+  https://learn.microsoft.com/en-us/azure/sentinel/
+
+- **Microsoft Entra ID Sign-in Logs Documentation**  
+  https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-sign-ins
+
+- **Kusto Query Language Documentation**  
+  https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/
+
+- **Microsoft Entra Conditional Access Documentation**  
+  https://learn.microsoft.com/en-us/entra/identity/conditional-access/
+
+- **Microsoft Defender Security Documentation**  
+  https://learn.microsoft.com/en-us/defender/
+
+- **MITRE ATT&CK Framework**  
+  https://attack.mitre.org/
