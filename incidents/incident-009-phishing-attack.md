@@ -19,9 +19,9 @@ Affected Systems: Microsoft Entra ID, Microsoft 365
 
 A phishing attack targeting employee credentials was identified after suspicious authentication activity was detected within Microsoft Entra ID sign-in logs.
 
-Investigation revealed that a user interacted with a malicious email containing a fraudulent login page designed to capture Microsoft 365 credentials.
+Investigation revealed that a user interacted with a malicious email containing a fraudulent login page designed to capture Microsoft 365 credentials. The phishing message impersonated a legitimate Microsoft security notification and directed the user to a fake authentication portal.
 
-The attacker attempted to use the compromised credentials to authenticate from an external IP address shortly after the phishing email was opened. Security monitoring systems flagged abnormal login behavior originating from a geographic region not previously associated with the affected user.
+Shortly after the user entered their credentials into the fraudulent login page, an authentication attempt was detected originating from an external IP address. Security monitoring systems flagged abnormal login behavior originating from a geographic region not previously associated with the affected user.
 
 Immediate containment actions were taken to prevent unauthorized access to enterprise resources.
 
@@ -49,74 +49,122 @@ The incident was detected through authentication monitoring and SIEM analysis wi
 
 Security alerts identified the following indicators:
 
-- Successful login attempt from an unfamiliar geographic location
-- Authentication originating from an IP address not previously associated with the user
-- Login activity occurring shortly after interaction with a suspicious email
+- Successful login attempt from an unfamiliar geographic location  
+- Authentication originating from an IP address not previously associated with the user  
+- Login activity occurring shortly after interaction with a suspicious email  
 
 These indicators triggered a Security Operations Center investigation.
 
 ---
 
-## Investigation
+# Investigation
 
-### Step 1 – Review Authentication Logs
-
-SOC analysts reviewed Microsoft Entra ID sign-in logs to identify abnormal authentication activity.
-
-Evidence source: Microsoft Entra ID Sign-in Logs
-
-Observed indicators included:
-
-- Login from an unfamiliar IP address
-- Authentication originating from a foreign geographic location
-- Login occurring shortly after the phishing email interaction
+Security analysts conducted a structured investigation to determine whether the authentication activity represented legitimate user behavior or the result of stolen credentials.
 
 ---
 
-### Step 2 – Examine User Activity
+## Step 1 – Review Microsoft Entra ID Sign-in Logs
 
-The affected user account activity was analyzed for suspicious behavior across Microsoft 365 services.
+Evidence Source: Microsoft Entra ID Sign-in Logs
+
+1. Open the Azure Portal  
+https://portal.azure.com
+
+2. Navigate to **Microsoft Entra ID**
+
+3. Select **Monitoring & Health**
+
+4. Click **Sign-in Logs**
+
+5. Apply the following filters:
+
+- User: `jsmith@company.com`  
+- Time Range: Incident timeframe  
+
+6. Review authentication telemetry including:
+
+- Client IP Address  
+- Location  
+- Application Accessed  
+- Sign-in Result  
+
+Investigators observed a login attempt originating from an unfamiliar IP address shortly after the phishing email interaction.
+
+---
+
+## Step 2 – Query Authentication Logs Using KQL
+
+Security investigators analyzed authentication activity using Microsoft Sentinel.
+
+```kql
+SigninLogs
+| where UserPrincipalName == "jsmith@company.com"
+| project TimeGenerated, IPAddress, Location, AppDisplayName, ResultType
+| order by TimeGenerated desc
+```
+
+Query results confirmed authentication attempts from an external IP address not previously associated with the user.
+
+---
+
+## Step 3 – Examine User Activity
+
+SOC analysts reviewed user activity across Microsoft 365 services to determine whether the attacker accessed corporate data.
 
 Investigators reviewed:
 
-- Mailbox activity
-- File downloads
-- SharePoint access
-- OneDrive activity
+- Mailbox activity  
+- File downloads  
+- SharePoint access  
+- OneDrive activity  
 
 No evidence of large-scale data access or exfiltration was identified.
 
 ---
 
-### Step 3 – Analyze Source IP Address
+## Step 4 – Analyze Source IP Address
 
-The external IP address associated with the authentication attempt was investigated using threat intelligence platforms including:
+The external IP address associated with the authentication attempt was investigated using threat intelligence platforms.
 
-- AbuseIPDB
-- AlienVault Open Threat Exchange
-- Microsoft Security Intelligence
+Sources reviewed included:
+
+- https://www.abuseipdb.com  
+- https://otx.alienvault.com  
+- https://www.microsoft.com/en-us/security/business/security-intelligence  
 
 Threat intelligence analysis indicated that the IP address had previously been associated with credential harvesting activity.
 
 ---
 
-### Step 4 – Review Phishing Email
+## Step 5 – Review Phishing Email
 
 The phishing email was analyzed to determine how the credentials were captured.
 
-Indicators included:
+Investigators identified the following indicators:
 
-- Domain impersonation
-- Misleading sender information
-- Embedded login page designed to mimic Microsoft authentication portals
+- Domain impersonation  
+- Misleading sender information  
+- Embedded login page designed to mimic Microsoft authentication portals  
 
-The email contained a malicious link directing the user to a fake Microsoft login page designed to harvest credentials.
+The message contained a malicious link directing the user to a fraudulent Microsoft login page designed to harvest credentials.
 
 ---
 
-## Indicators of Compromise
+## Step 6 – Determine Incident Impact
 
-The following indicators were identified during the investigation.
+Security investigators evaluated whether the attacker successfully accessed enterprise resources.
+
+Investigators confirmed:
+
+- Suspicious authentication attempt occurred  
+- Credentials were exposed through phishing  
+- No large-scale data access occurred  
+
+Immediate remediation actions prevented further unauthorized access.
+
+---
+
+# Indicators of Compromise
 
 | Indicator Type | Value |
 |---|---|
@@ -128,21 +176,21 @@ The following indicators were identified during the investigation.
 
 ---
 
-## Remediation
+# Remediation
 
 The following containment actions were executed to mitigate the incident.
 
-- Affected user account password reset
-- Active authentication sessions revoked
-- Suspicious IP address blocked using Conditional Access policies
-- Phishing email removed from affected mailboxes
-- Multi Factor Authentication enforcement verified
+- Affected user account password reset  
+- Active authentication sessions revoked  
+- Suspicious IP address blocked using Conditional Access policies  
+- Phishing email removed from affected mailboxes  
+- Multi Factor Authentication enforcement verified  
 
 These actions prevented further unauthorized access to enterprise systems.
 
 ---
 
-## MITRE ATT&CK Mapping
+# MITRE ATT&CK Mapping
 
 | Technique | ID | Description |
 |---|---|---|
@@ -154,7 +202,7 @@ Mapping attack activity to MITRE ATT&CK helps security teams understand adversar
 
 ---
 
-## Lessons Learned
+# Lessons Learned
 
 Phishing attacks remain one of the most common techniques used by attackers to obtain user credentials.
 
@@ -164,19 +212,19 @@ Continued user education and identity security controls are essential to prevent
 
 ---
 
-## Recommended Security Improvements
+# Recommended Security Improvements
 
 The following defensive measures are recommended to strengthen organizational security.
 
-- Expand phishing awareness training for employees
-- Implement stricter Conditional Access policies
-- Monitor authentication logs for suspicious activity
-- Enable automated alerts for risky sign-in events
-- Improve email filtering rules to block phishing attempts
+- Expand phishing awareness training for employees  
+- Implement stricter Conditional Access policies  
+- Monitor authentication logs for suspicious activity  
+- Enable automated alerts for risky sign-in events  
+- Improve email filtering rules to block phishing attempts  
 
 ---
 
-## Conclusion
+# Conclusion
 
 The phishing attack successfully captured user credentials but was detected quickly through abnormal authentication monitoring.
 
@@ -186,24 +234,24 @@ Ongoing monitoring and defensive improvements will reduce the likelihood of simi
 
 ---
 
-## Documentation
+# Documentation
 
 The investigation techniques and remediation procedures documented in this incident report were developed through review of publicly available cybersecurity documentation and vendor guidance.
 
-- **Microsoft Sentinel Documentation**  
-  https://learn.microsoft.com/en-us/azure/sentinel/
+**Microsoft Sentinel Documentation**  
+https://learn.microsoft.com/en-us/azure/sentinel/
 
-- **Microsoft Entra ID Sign-in Logs Documentation**  
-  https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-sign-ins
+**Microsoft Entra ID Sign-in Logs Documentation**  
+https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-sign-ins
 
-- **Kusto Query Language Documentation**  
-  https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/
+**Kusto Query Language Documentation**  
+https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/
 
-- **Microsoft Entra Conditional Access Documentation**  
-  https://learn.microsoft.com/en-us/entra/identity/conditional-access/
+**Microsoft Entra Conditional Access Documentation**  
+https://learn.microsoft.com/en-us/entra/identity/conditional-access/
 
-- **Microsoft Defender Security Documentation**  
-  https://learn.microsoft.com/en-us/defender/
+**Microsoft Defender Security Documentation**  
+https://learn.microsoft.com/en-us/defender/
 
-- **MITRE ATT&CK Framework**  
-  https://attack.mitre.org/
+**MITRE ATT&CK Framework**  
+https://attack.mitre.org/
