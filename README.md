@@ -173,6 +173,8 @@ This process involved developing detection queries, reviewing authentication log
 
 This workflow reflects the process commonly used by Security Operations Center analysts when investigating identity related security alerts.
 
+<sub>Back to [Quick Navigation](#quick-navigation)</sub>
+
 ## Click by Click Investigation Workflow
 
 1. Sign in to the Microsoft Azure Portal  
