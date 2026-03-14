@@ -18,7 +18,6 @@ The scenarios documented in this repository include authentication attacks, cred
 
 | Section | Link |
 |--------|------|
-| Investigation Methodology | [Jump](#investigation-methodology-and-learning-process) |
 | Investigation Workflow | [Jump](#investigation-workflow) |
 | MITRE ATT&CK Techniques | [Jump](#mitre-attck-techniques) |
 | KQL Investigation | [Jump](#kusto-query-language) |
