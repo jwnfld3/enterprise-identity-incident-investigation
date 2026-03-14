@@ -40,21 +40,60 @@ Indicators included:
 
 ---
 
-## Investigation
+# Investigation
 
-### Step 1 – Review Authentication Logs
-
-Security investigators reviewed Microsoft Entra ID sign-in logs for the disabled account.
-
-Evidence source: Microsoft Entra ID Sign-in Logs
-
-Investigators analyzed authentication telemetry including login timestamps, IP addresses, device information, and geographic location data.
-
-Log analysis confirmed repeated login attempts targeting the disabled account. Each authentication attempt originated from an external IP address and was automatically rejected due to the account’s disabled status.
+Security analysts conducted a structured investigation to determine whether the authentication activity represented a credential attack attempt or unauthorized access attempt.
 
 ---
 
-### Step 2 – Identify Suspicious Authentication Behavior
+## Step 1 – Review Microsoft Entra ID Sign-in Logs
+
+Evidence Source: Microsoft Entra ID Sign-in Logs
+
+1. Open the Azure Portal  
+   https://portal.azure.com
+
+2. Navigate to **Microsoft Entra ID**
+
+3. Select **Monitoring & Health**
+
+4. Click **Sign-in Logs**
+
+5. Apply the following filters:
+
+   - User: `former.employee@company.com`
+   - Time Range: Set to incident timeframe
+
+6. Review the following fields:
+
+   - Client IP Address
+   - Location
+   - Application Accessed
+   - Sign-in Status
+   - Device Information
+
+Investigators observed repeated authentication attempts targeting the disabled account. Each authentication attempt originated from an external IP address and was rejected due to the account’s disabled status.
+
+---
+
+## Step 2 – Query Authentication Logs Using KQL
+
+Security investigators queried authentication telemetry to review login attempts associated with the disabled account.
+
+```kql
+SigninLogs
+| where UserPrincipalName == "former.employee@company.com"
+| project TimeGenerated, IPAddress, Location, AppDisplayName, ResultType
+| order by TimeGenerated desc
+```
+
+Query results confirmed repeated login attempts originating from the same external IP address within a short timeframe.
+
+The authentication attempts were rejected because the account had already been disabled.
+
+---
+
+## Step 3 – Identify Suspicious Authentication Behavior
 
 The authentication activity demonstrated characteristics commonly associated with credential abuse attempts.
 
@@ -68,29 +107,56 @@ These indicators suggested that an attacker may have attempted to access the acc
 
 ---
 
-### Step 3 – Verify Account Status
+## Step 4 – Verify Account Status
 
-Security investigators confirmed that the account had been disabled during the employee offboarding process.
+Security investigators verified the account status within Microsoft Entra ID.
 
-Account status checks verified that:
+1. Navigate to **Microsoft Entra Admin Center**
 
-- The account was disabled in Microsoft Entra ID
+2. Select **Users**
+
+3. Search for the user account `former.employee@company.com`
+
+4. Review the **Account Enabled Status**
+
+Investigators confirmed:
+
+- The account was **disabled**
 - Authentication access had been revoked
-- No active sessions remained associated with the account
+- No active authentication sessions existed
 
-Because the account was disabled, authentication attempts were automatically blocked.
+Because the account was disabled, all authentication attempts were automatically blocked.
 
 ---
 
-### Step 4 – Evaluate Security Controls
+## Step 5 – Evaluate Security Controls
 
 Investigators reviewed identity security policies and offboarding procedures to ensure proper access controls had been implemented.
 
-Security controls successfully prevented unauthorized access because the disabled account could not authenticate to Microsoft 365 services.
+Security controls verified included:
+
+- Account disabled status
+- Conditional Access enforcement
+- Identity protection monitoring
+- Sign-in activity monitoring
+
+These security controls successfully prevented unauthorized access to enterprise resources.
 
 ---
 
-## Remediation
+## Step 6 – Determine Incident Impact
+
+Investigators confirmed that:
+
+- No successful authentication occurred
+- No Microsoft 365 resources were accessed
+- No active sessions were established
+
+Because the account had already been disabled, the attempted authentication activity did not result in unauthorized access.
+
+---
+
+# Remediation
 
 The following remediation actions were taken to ensure continued protection of the environment.
 
@@ -104,7 +170,7 @@ These actions confirmed that the attempted authentication activity did not resul
 
 ---
 
-## MITRE ATT&CK Mapping
+# MITRE ATT&CK Mapping
 
 | Technique | ID | Description |
 |---|---|---|
@@ -113,7 +179,7 @@ These actions confirmed that the attempted authentication activity did not resul
 
 ---
 
-## Lessons Learned
+# Lessons Learned
 
 This investigation highlights the importance of proper user offboarding procedures and identity access management controls.
 
@@ -125,24 +191,34 @@ Maintaining strong identity governance and monitoring authentication telemetry a
 
 ---
 
-## Documentation
+# Conclusion
+
+The investigation confirmed that repeated authentication attempts targeted a disabled account belonging to a former employee. Because proper offboarding procedures had already disabled the account, the authentication attempts were automatically rejected.
+
+Identity monitoring systems successfully detected the suspicious login activity, and security investigators verified that no unauthorized access occurred.
+
+This incident demonstrates the importance of maintaining strong offboarding procedures and continuous authentication monitoring within enterprise identity environments.
+
+---
+
+# Documentation
 
 The investigation techniques and remediation procedures documented in this incident report were developed through review of publicly available cybersecurity documentation and vendor guidance.
 
-- **Microsoft Sentinel Documentation**  
-  https://learn.microsoft.com/en-us/azure/sentinel/
+**Microsoft Sentinel Documentation**  
+https://learn.microsoft.com/en-us/azure/sentinel/
 
-- **Microsoft Entra ID Sign-in Logs Documentation**  
-  https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-sign-ins
+**Microsoft Entra ID Sign-in Logs Documentation**  
+https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-sign-ins
 
-- **Kusto Query Language Documentation**  
-  https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/
+**Kusto Query Language Documentation**  
+https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/
 
-- **Microsoft Entra Conditional Access Documentation**  
-  https://learn.microsoft.com/en-us/entra/identity/conditional-access/
+**Microsoft Entra Conditional Access Documentation**  
+https://learn.microsoft.com/en-us/entra/identity/conditional-access/
 
-- **Microsoft Defender Security Documentation**  
-  https://learn.microsoft.com/en-us/defender/
+**Microsoft Defender Security Documentation**  
+https://learn.microsoft.com/en-us/defender/
 
-- **MITRE ATT&CK Framework**  
-  https://attack.mitre.org/
+**MITRE ATT&CK Framework**  
+https://attack.mitre.org/
