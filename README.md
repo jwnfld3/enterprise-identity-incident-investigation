@@ -138,9 +138,40 @@ Security analysts rely on KQL to investigate identity security alerts and perfor
 <sub>Back to [Quick Navigation](#quick-navigation)</sub>
 ---
 
-# Investigation Learning Process
+## Investigation Learning Process
 
-The investigation workflow used in this project was learned by studying Microsoft Sentinel documentation and performing hands on log analysis inside a simulated lab environment.
+The investigation workflow used in this project was learned through studying Microsoft Sentinel documentation and performing hands on log analysis within a simulated lab environment.
+
+The objective was to understand how Security Operations Center analysts investigate authentication related security alerts using Microsoft Sentinel and Microsoft Entra ID authentication telemetry.
+
+This process involved developing detection queries, reviewing authentication logs, identifying suspicious login behavior, and mapping the activity to known MITRE ATT&CK techniques.
+
+### Click by Click Investigation Workflow
+
+1. Sign in to the Microsoft Azure Portal.
+2. Search for **Microsoft Sentinel** in the Azure portal search bar.
+3. Open the Sentinel workspace used for the lab environment.
+4. Select **Logs** from the Sentinel navigation menu.
+5. Review available log tables including:
+
+   - SigninLogs  
+   - SecurityEvent  
+   - AuditLogs  
+
+6. Enter KQL queries into the Sentinel query editor.
+7. Select **Run** to execute the query.
+8. Review authentication activity returned in the query results.
+9. Identify suspicious patterns such as:
+
+   - repeated login failures  
+   - authentication attempts from unusual geographic locations  
+   - repeated MFA prompts  
+
+10. Compare the results with the simulated attack scenario.
+11. Map the observed activity to the appropriate **MITRE ATT&CK technique**.
+12. Document the investigation findings and remediation procedures.
+
+This workflow reflects the process commonly used by Security Operations Center analysts when investigating identity related security alerts.
 
 ## Click by Click Investigation Workflow
 
