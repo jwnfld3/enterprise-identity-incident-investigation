@@ -44,6 +44,7 @@ This repository is organized to simulate the investigation workflow used by Secu
 
 The investigation process follows four primary stages.
 
+<sub>Back to [Quick Navigation](#quick-navigation)</sub>
 ---
 
 ## Detection
