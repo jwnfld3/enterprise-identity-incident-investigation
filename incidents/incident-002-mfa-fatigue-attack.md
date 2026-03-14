@@ -34,112 +34,169 @@ The incident was detected through a combination of user reporting and automated 
 
 Indicators included:
 
-- Multiple MFA push notifications sent within a short time period
-- Login attempts originating from an unfamiliar geographic location
-- Repeated authentication failures followed by MFA challenges
+- Multiple MFA push notifications sent within a short time period  
+- Login attempts originating from an unfamiliar geographic location  
+- Repeated authentication failures followed by MFA challenges  
 
 ---
 
 ## Investigation
 
-### Step 1 – Review MFA Authentication Logs
-
-Security investigators reviewed Multi Factor Authentication activity logs.
-
-Evidence source: Microsoft Entra ID Sign-in Logs
-
-Investigators analyzed authentication telemetry including login timestamps, IP addresses, device information, and geographic location data.
-
-Log analysis confirmed repeated authentication attempts originating from an unfamiliar IP address associated with a foreign geographic region. Each login attempt triggered an MFA push notification sent to the user’s registered device.
-
-The repeated authentication attempts occurred within a short time interval, which is behavior commonly associated with MFA fatigue attacks.
+Security analysts performed a structured investigation to determine whether the repeated MFA prompts were the result of a malicious authentication attempt.
 
 ---
 
-### Step 2 – Identify Suspicious Authentication Behavior
+### Step 1 – Review Microsoft Entra ID Sign-in Logs
 
-The authentication activity demonstrated characteristics consistent with a potential MFA fatigue attack.
+Evidence Source: Microsoft Entra ID Sign-in Logs
 
-Observed indicators included:
+1. Open the Azure Portal  
+https://portal.azure.com
 
-- Repeated MFA push notifications sent to the user
-- Authentication attempts originating from an unfamiliar geographic location
-- Login attempts from an IP address not previously associated with the user
-- Multiple authentication failures followed by MFA challenges
+2. Navigate to **Microsoft Entra ID**
 
-Attackers sometimes attempt to overwhelm users with authentication prompts in the hope that the user will eventually approve the request.
+3. Select **Monitoring & Health**
 
----
+4. Click **Sign-in Logs**
 
-### Step 3 – Confirm User Activity
+5. In the filters panel:
 
-Security investigators contacted the affected user to verify whether the authentication attempts were legitimate.
+- Enter the affected user account `jsmith@company.com`
+- Adjust the **Time Range** to the incident timeframe
+- Review the **Client IP Address**
+- Review the **Location**
+- Review the **Authentication Requirement**
 
-The user confirmed that they did not initiate the login attempts and had not attempted to access Microsoft 365 during the time the authentication prompts were received.
+6. Investigators observed:
 
-This confirmation indicated that the authentication attempts were unauthorized.
+- repeated authentication attempts  
+- authentication originating from a foreign IP address  
+- multiple MFA challenges triggered  
 
----
-
-### Step 4 – Evaluate Security Controls
-
-Conditional Access and Multi Factor Authentication policies were reviewed to confirm that the authentication attempts were unsuccessful.
-
-Security controls successfully prevented the attacker from gaining access to the Microsoft 365 environment because the user did not approve any authentication prompts.
+These indicators suggested automated authentication attempts targeting the user account.
 
 ---
 
-## Remediation
+### Step 2 – Review Conditional Access Evaluation
 
-The following remediation actions were taken to secure the affected account.
+1. Within the **Sign-in Logs** entry, select the suspicious authentication attempt.
 
-- User password was reset
-- Active authentication sessions were revoked
-- Multi Factor Authentication settings were reviewed
-- Security monitoring was increased for the affected account
-- User was instructed to report any additional unexpected MFA prompts
+2. Open the **Conditional Access** tab.
 
-These remediation actions ensured that the attempted authentication activity did not result in unauthorized account access.
+3. Review policy evaluation results including:
 
----
+- MFA requirement enforcement  
+- device compliance status  
+- sign-in risk level  
 
-## MITRE ATT&CK Mapping
-
-| Technique | ID | Description |
-|---|---|---|
-| Valid Accounts | T1078 | Attempted authentication using legitimate user credentials |
-| Multi Factor Authentication Interception | T1621 | Attempts to bypass or manipulate multi factor authentication mechanisms |
+The evaluation confirmed that MFA was correctly required for the authentication attempt.
 
 ---
 
-## Lessons Learned
+### Step 3 – Query Authentication Logs Using KQL
 
-This investigation demonstrates how attackers may attempt to exploit user behavior by sending repeated authentication prompts in an attempt to gain approval.
+1. In **Microsoft Sentinel**, select **Logs**.
 
-Multi Factor Authentication remains an effective security control, but user awareness is critical. Users should be trained to recognize unexpected authentication prompts and immediately report suspicious activity.
+2. Run the following query to identify repeated authentication attempts.
 
-Monitoring authentication logs and promptly investigating unusual login behavior helps organizations detect and respond to identity security threats before unauthorized access occurs.
+```kql
+SigninLogs
+| where UserPrincipalName == "jsmith@company.com"
+| summarize AttemptCount = count() by IPAddress, Location, bin(TimeGenerated, 10m)
+| order by AttemptCount desc
+```
+
+Query results confirmed multiple authentication attempts originating from the same external IP address within a short timeframe.
+
+This pattern is consistent with MFA fatigue attack behavior.
+
+---
+
+### Step 4 – Validate IP Address Reputation
+
+Investigators analyzed the source IP address using threat intelligence platforms.
+
+Sources reviewed included:
+
+- https://www.abuseipdb.com
+- https://otx.alienvault.com
+- https://www.microsoft.com/en-us/security/business/security-intelligence
+
+The IP address had previously been associated with suspicious authentication activity.
+
+---
+
+### Step 5 – Confirm User Activity
+
+Security investigators contacted the affected user to verify whether the authentication prompts were legitimate.
+
+The user confirmed:
+
+- they did not initiate any login attempts
+- they did not approve any MFA prompts
+- the prompts were unexpected
+
+This confirmation verified that the authentication attempts were unauthorized.
+
+---
+
+### Step 6 – Evaluate Security Controls
+
+Security analysts verified that identity protection controls were functioning correctly.
+
+Controls reviewed included:
+
+- Multi Factor Authentication enforcement
+- Conditional Access policies
+- account sign-in risk monitoring
+- identity protection alerts
+
+Because the user did not approve any MFA requests, the attacker was unable to gain access to the account.
+
+---
+
+### Step 7 – Determine Incident Impact
+
+Investigators confirmed that:
+
+- no successful login occurred
+- no cloud resources were accessed
+- no mailbox or file activity occurred
+
+The attack attempt was unsuccessful due to MFA enforcement and user awareness.
+
+---
+
+## Conclusion
+
+The investigation determined that the repeated authentication prompts were part of a Multi Factor Authentication fatigue attack targeting the user account.
+
+The attacker attempted to trigger repeated MFA challenges in an effort to trick the user into approving an authentication request. However, the user did not approve any prompts and promptly reported the suspicious activity.
+
+Because MFA was properly enforced and the user did not authorize the login attempt, the attacker was unable to gain access to the Microsoft 365 environment. The security controls in place effectively prevented unauthorized account access.
+
+Continued monitoring and user awareness remain critical components of defending against identity-based attacks.
 
 ---
 
 ## Documentation
 
-The investigation techniques and remediation procedures documented in this incident report were developed through review of publicly available cybersecurity documentation and vendor guidance.
+The investigation techniques and remediation procedures documented in this report were developed through review of publicly available cybersecurity documentation and vendor guidance.
 
 - **Microsoft Sentinel Documentation**  
-  https://learn.microsoft.com/en-us/azure/sentinel/
+https://learn.microsoft.com/en-us/azure/sentinel/
 
 - **Microsoft Entra ID Sign-in Logs Documentation**  
-  https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-sign-ins
+https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-sign-ins
 
 - **Kusto Query Language Documentation**  
-  https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/
+https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/
 
 - **Microsoft Entra Conditional Access Documentation**  
-  https://learn.microsoft.com/en-us/entra/identity/conditional-access/
+https://learn.microsoft.com/en-us/entra/identity/conditional-access/
 
 - **Microsoft Defender Security Documentation**  
-  https://learn.microsoft.com/en-us/defender/
+https://learn.microsoft.com/en-us/defender/
 
 - **MITRE ATT&CK Framework**  
-  https://attack.mitre.org/
+https://attack.mitre.org/
