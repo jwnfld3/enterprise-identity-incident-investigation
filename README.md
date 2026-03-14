@@ -14,17 +14,17 @@ The scenarios documented in this repository include authentication attacks, cred
 
 ---
 
-# Quick Navigation
+## Quick Navigation
 
-| Section | Link |
-|--------|------|
-| Investigation Workflow | [Jump](#investigation-workflow) |
-| MITRE ATT&CK Techniques | [Jump](#mitre-attck-techniques) |
-| KQL Investigation | [Jump](#kusto-query-language) |
-| Investigation Learning Process | [Jump](#investigation-learning-process) |
-| Incident Response Playbooks | [Jump](#incident-response-playbooks) |
-| Documentation Sources | [Jump](#documentation-sources) |
-| Project Transparency | [Jump](#project-transparency) |
+| Section | Description |
+|--------|-------------|
+| 🔍 **[Investigation Workflow](#investigation-workflow)** | Overview of the SOC investigation process used in this project |
+| 🧠 **[MITRE ATT&CK Techniques](#mitre-attck-techniques)** | Mapping suspicious activity to attacker tactics and techniques |
+| 📊 **[Kusto Query Language](#kusto-query-language)** | Using KQL to analyze authentication logs and detect threats |
+| 📚 **[Investigation Learning Process](#investigation-learning-process)** | How the investigation workflow was learned in the lab environment |
+| 🛡 **[Incident Response Playbooks](#incident-response-playbooks)** | Structured remediation procedures for simulated security incidents |
+| 📖 **[Documentation Sources](#documentation-sources)** | Microsoft documentation and security frameworks used |
+| ⚙ **[Project Transparency](#project-transparency)** | Explanation of the simulated lab environment |
 
 ---
 
