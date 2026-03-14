@@ -23,6 +23,8 @@ An identity compromise incident was identified after suspicious authentication a
 
 Initial investigation indicated that an attacker likely obtained valid user credentials and attempted to gain access to enterprise cloud services including Microsoft 365.
 
+The activity was escalated to the Security Operations Center for investigation and containment.
+
 ---
 
 ## Detection
@@ -69,9 +71,9 @@ Login attempts originated from a geographic location inconsistent with the user'
 
 **Authentication Pattern**
 
-- Multiple failed login attempts
-- Successful authentication after repeated failures
-- Authentication originating from unfamiliar infrastructure
+- Multiple failed login attempts  
+- Successful authentication after repeated failures  
+- Authentication originating from unfamiliar infrastructure  
 
 **Suspicious User Activity**
 
@@ -79,29 +81,69 @@ Shortly after successful authentication, the account initiated cloud activity in
 
 ---
 
-## Investigation
+# Investigation
 
-### Step 1 – Review Authentication Logs
-
-Security investigators reviewed Microsoft Entra ID sign-in logs for the affected account.
-
-Evidence source: Microsoft Entra ID Sign-in Logs
-
-Authentication telemetry confirmed multiple failed login attempts followed by a successful login originating from an unfamiliar external IP address.
+Security analysts conducted a structured investigation to determine whether the authentication activity represented a legitimate login or a compromised identity.
 
 ---
 
-### Step 2 – Verify Login Location
+## Step 1 – Review Microsoft Entra ID Sign-in Logs
 
-Security analysts evaluated login location data associated with the authentication activity.
+Evidence Source: Microsoft Entra ID Sign-in Logs
 
-The login originated from a geographic region inconsistent with the user’s normal login patterns.
+1. Open the Azure Portal  
+https://portal.azure.com
+
+2. Navigate to **Microsoft Entra ID**
+
+3. Select **Monitoring & Health**
+
+4. Click **Sign-in Logs**
+
+5. Apply the following filters:
+
+- User: `jsmith@company.com`
+- Time Range: Incident timeframe
+
+6. Review authentication telemetry including:
+
+- Client IP Address  
+- Location  
+- Application Accessed  
+- Sign-in Result  
+
+Authentication telemetry confirmed multiple failed login attempts followed by a successful authentication originating from an unfamiliar external IP address.
 
 ---
 
-### Step 3 – Review User Activity
+## Step 2 – Query Authentication Logs Using KQL
 
-Investigators reviewed Microsoft 365 activity logs to determine actions performed after the successful login.
+Security investigators analyzed authentication telemetry using Microsoft Sentinel.
+
+```kql
+SigninLogs
+| where UserPrincipalName == "jsmith@company.com"
+| project TimeGenerated, IPAddress, Location, AppDisplayName, ResultType
+| order by TimeGenerated desc
+```
+
+Query results confirmed repeated authentication failures followed by a successful login originating from an unfamiliar external IP address.
+
+---
+
+## Step 3 – Verify Login Location
+
+Security analysts evaluated geographic login data associated with the authentication events.
+
+Investigators confirmed that the login originated from a location inconsistent with the user's normal login behavior.
+
+This abnormal location was identified as a potential indicator of credential compromise.
+
+---
+
+## Step 4 – Review User Activity
+
+Security investigators analyzed Microsoft 365 activity logs to determine actions performed after the successful authentication.
 
 Observed activity included:
 
@@ -109,28 +151,46 @@ Observed activity included:
 - Mailbox interactions
 - Cloud resource access shortly after authentication
 
+The activity suggested that the attacker attempted to interact with enterprise cloud services immediately after gaining access.
+
 ---
 
-### Step 4 – Validate Threat Intelligence
+## Step 5 – Validate Threat Intelligence
 
-The suspicious IP address was evaluated against threat intelligence sources including:
+The suspicious IP address was evaluated using external threat intelligence platforms.
 
-- AbuseIPDB
-- AlienVault OTX
-- Microsoft Security Intelligence
+Sources reviewed included:
+
+- https://www.abuseipdb.com  
+- https://otx.alienvault.com  
+- https://www.microsoft.com/en-us/security/business/security-intelligence  
 
 Threat intelligence analysis indicated that the IP address had previously been associated with credential attack activity.
 
 ---
 
-## Remediation
+## Step 6 – Determine Incident Impact
+
+Security investigators assessed the potential impact of the compromised account.
+
+Investigators confirmed:
+
+- Unauthorized authentication occurred
+- Suspicious cloud activity followed the login
+- Identity protection alerts triggered immediately
+
+The activity indicated a confirmed identity compromise event.
+
+---
+
+# Remediation
 
 The following containment and remediation actions were implemented to secure the affected account.
 
 - User account password reset
 - Active authentication sessions revoked
 - Suspicious IP address blocked using Conditional Access policies
-- Multi factor authentication enforced
+- Multi Factor Authentication enforced
 - User mailbox and cloud storage activity reviewed for unauthorized access
 - Security monitoring increased for additional suspicious authentication attempts
 
@@ -138,7 +198,7 @@ These actions prevented further unauthorized access to enterprise systems.
 
 ---
 
-## MITRE ATT&CK Mapping
+# MITRE ATT&CK Mapping
 
 | Technique | ID | Description |
 |---|---|---|
@@ -148,7 +208,7 @@ These actions prevented further unauthorized access to enterprise systems.
 
 ---
 
-## Lessons Learned
+# Lessons Learned
 
 This incident highlights the importance of continuous authentication monitoring and rapid incident response.
 
@@ -158,7 +218,7 @@ Early detection of suspicious login patterns allowed the security team to contai
 
 ---
 
-## Recommended Security Improvements
+# Recommended Security Improvements
 
 The following defensive measures are recommended to reduce the likelihood of similar incidents.
 
@@ -170,34 +230,34 @@ The following defensive measures are recommended to reduce the likelihood of sim
 
 ---
 
-## Conclusion
+# Conclusion
 
 The investigation confirmed that the suspicious authentication activity was the result of an identity compromise involving valid user credentials.
 
-Rapid response actions including password reset, session revocation, and conditional access enforcement successfully contained the incident.
+Rapid response actions including password reset, session revocation, and Conditional Access enforcement successfully contained the incident.
 
 Ongoing monitoring and improved identity security controls are recommended to strengthen the organization’s security posture against credential based attacks.
 
 ---
 
-## Documentation
+# Documentation
 
 The investigation techniques and remediation procedures documented in this incident report were developed through review of publicly available cybersecurity documentation and vendor guidance.
 
-- **Microsoft Sentinel Documentation**  
-  https://learn.microsoft.com/en-us/azure/sentinel/
+**Microsoft Sentinel Documentation**  
+https://learn.microsoft.com/en-us/azure/sentinel/
 
-- **Microsoft Entra ID Sign-in Logs Documentation**  
-  https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-sign-ins
+**Microsoft Entra ID Sign-in Logs Documentation**  
+https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-sign-ins
 
-- **Kusto Query Language Documentation**  
-  https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/
+**Kusto Query Language Documentation**  
+https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/
 
-- **Microsoft Entra Conditional Access Documentation**  
-  https://learn.microsoft.com/en-us/entra/identity/conditional-access/
+**Microsoft Entra Conditional Access Documentation**  
+https://learn.microsoft.com/en-us/entra/identity/conditional-access/
 
-- **Microsoft Defender Security Documentation**  
-  https://learn.microsoft.com/en-us/defender/
+**Microsoft Defender Security Documentation**  
+https://learn.microsoft.com/en-us/defender/
 
-- **MITRE ATT&CK Framework**  
-  https://attack.mitre.org/
+**MITRE ATT&CK Framework**  
+https://attack.mitre.org/
