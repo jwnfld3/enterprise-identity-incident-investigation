@@ -40,67 +40,155 @@ Indicators included:
 
 ---
 
-## Investigation
+# Investigation
 
-### Step 1 – Review Sign In Logs
-
-Security investigators reviewed Microsoft Entra ID authentication logs.
-
-Evidence source: Microsoft Entra ID Sign-in Logs
-
-Investigators analyzed authentication telemetry including login timestamps, IP addresses, device information, and geographic location data.
-
-Log analysis confirmed that the user account successfully authenticated from Seattle, Washington, followed shortly by a login from Frankfurt, Germany. The short time interval between the two login events made legitimate travel between the locations impossible.
+Security analysts performed a structured investigation to determine whether the login activity represented legitimate user behavior or a potential credential compromise.
 
 ---
 
-### Step 2 – Identify Suspicious Login Pattern
+## Step 1 – Review Microsoft Entra ID Sign-in Logs
 
-Investigators compared the login locations and timestamps associated with the authentication events.
+Evidence Source: Microsoft Entra ID Sign-in Logs
 
-Observed indicators included:
+1. Open the Azure Portal  
+https://portal.azure.com
 
-- Authentication events originating from geographically distant locations
-- Login events occurring within minutes of each other
-- Geographic travel time inconsistent with normal human travel
+2. Navigate to **Microsoft Entra ID**
 
-These indicators strongly suggested the possibility that the user’s credentials had been used from a separate location by an unauthorized party.
+3. Select **Monitoring & Health**
+
+4. Click **Sign-in Logs**
+
+5. Apply the following filters:
+
+- User: `jsmith@company.com`
+- Time Range: Set to incident timeframe
+- Review **Client IP Address**
+- Review **Location**
+- Review **Device Information**
+- Review **Application Accessed**
+
+Investigators observed:
+
+- Successful authentication from **Seattle, Washington**
+- Authentication from **Frankfurt, Germany**
+- Both authentication events occurring within minutes
+
+This behavior triggered the **Impossible Travel risk alert**.
 
 ---
 
-### Step 3 – Confirm User Activity
+## Step 2 – Review Identity Protection Risk Alerts
+
+1. Navigate to **Microsoft Entra Admin Center**
+
+2. Select **Identity Protection**
+
+3. Click **Risky Sign-ins**
+
+4. Filter results by user `jsmith@company.com`
+
+5. Review the alert details including:
+
+- Sign-in Risk Level
+- Risk Detection Type
+- Source IP Address
+- Geographic Location
+- Detection Timestamp
+
+The system classified the event as **Impossible Travel**, indicating suspicious login behavior.
+
+---
+
+## Step 3 – Query Authentication Logs Using KQL
+
+1. Open **Microsoft Sentinel**
+
+2. Select **Logs**
+
+3. Run the following query:
+
+```kql
+SigninLogs
+| where UserPrincipalName == "jsmith@company.com"
+| project TimeGenerated, IPAddress, Location, AppDisplayName, ResultType
+| order by TimeGenerated desc
+```
+
+4. Query results confirmed authentication activity originating from **two geographically distant locations within minutes**.
+
+This authentication pattern strongly suggested possible credential compromise.
+
+---
+
+## Step 4 – Validate IP Address Reputation
+
+Investigators analyzed the suspicious IP address using threat intelligence platforms.
+
+Sources reviewed included:
+
+- https://www.abuseipdb.com
+- https://otx.alienvault.com
+- https://www.microsoft.com/en-us/security/business/security-intelligence
+
+Threat intelligence checks help determine whether the IP address has previously been associated with malicious activity.
+
+---
+
+## Step 5 – Confirm User Activity
 
 Security investigators contacted the affected user to verify whether the authentication events were legitimate.
 
-The user confirmed that they were physically located in Seattle at the time of the login and had not traveled internationally.
+The user confirmed:
 
-This confirmation indicated that the login activity from Frankfurt was unauthorized.
+- They were physically located in **Seattle**
+- They had **not traveled internationally**
+- They had **not initiated any login attempts from Germany**
 
----
-
-### Step 4 – Evaluate Security Controls
-
-Conditional Access and identity risk policies were reviewed to ensure appropriate security controls were in place.
-
-Security controls flagged the suspicious login activity and generated the Impossible Travel alert, allowing security investigators to respond quickly.
+This confirmation indicated that the Frankfurt authentication event was unauthorized.
 
 ---
 
-## Remediation
+## Step 6 – Evaluate Security Controls
+
+Security analysts reviewed the following identity protection controls:
+
+- Multi Factor Authentication enforcement
+- Conditional Access policies
+- Sign-in risk detection
+- Identity Protection alerts
+
+These security controls successfully detected the suspicious authentication pattern.
+
+---
+
+## Step 7 – Determine Incident Impact
+
+Investigators confirmed:
+
+- The suspicious login activity was detected quickly
+- No sensitive resources were accessed
+- No abnormal mailbox or file activity occurred
+
+The suspicious authentication attempt was investigated before any damage occurred.
+
+---
+
+# Remediation
 
 The following remediation actions were taken to secure the affected account.
 
-- User password was reset
-- Active authentication sessions were revoked
+- User password reset
+- Active authentication sessions revoked
 - User required to re-authenticate using Multi Factor Authentication
-- Security monitoring increased for the affected account
-- Conditional Access policies reviewed for additional protections
+- Increased monitoring for the affected account
+- Conditional Access policies reviewed and strengthened
 
-These remediation actions ensured that the suspicious login activity did not result in unauthorized access to enterprise systems.
+These remediation actions prevented unauthorized access to enterprise systems.
 
 ---
 
-## MITRE ATT&CK Mapping
+# MITRE ATT&CK Mapping
 
 | Technique | ID | Description |
 |---|---|---|
@@ -109,36 +197,38 @@ These remediation actions ensured that the suspicious login activity did not res
 
 ---
 
-## Lessons Learned
+# Conclusion
 
-This investigation demonstrates how identity risk monitoring systems can detect abnormal login patterns associated with compromised credentials.
+The investigation determined that the authentication activity was consistent with an **Impossible Travel login alert**, indicating potential credential compromise.
 
-Impossible travel detection is an effective method for identifying potential credential compromise when authentication events originate from geographically distant locations within an unrealistic time frame.
+Security monitoring systems detected authentication events from geographically distant locations within minutes, which is not possible through normal travel.
 
-Prompt investigation of identity risk alerts and verification with affected users helps security teams quickly determine whether authentication activity is legitimate or malicious.
+The user confirmed they had not traveled internationally and did not initiate the suspicious authentication attempt.
 
-Continuous monitoring of authentication telemetry is essential for protecting enterprise identity systems.
+Security controls including identity risk detection, authentication monitoring, and rapid incident response successfully prevented unauthorized access to enterprise resources.
+
+Continuous monitoring of authentication activity and rapid investigation of identity risk alerts remain essential for protecting enterprise identity systems.
 
 ---
 
-## Documentation
+# Documentation
 
 The investigation techniques and remediation procedures documented in this incident report were developed through review of publicly available cybersecurity documentation and vendor guidance.
 
-- **Microsoft Sentinel Documentation**  
-  https://learn.microsoft.com/en-us/azure/sentinel/
+**Microsoft Sentinel Documentation**  
+https://learn.microsoft.com/en-us/azure/sentinel/
 
-- **Microsoft Entra ID Sign-in Logs Documentation**  
-  https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-sign-ins
+**Microsoft Entra ID Sign-in Logs Documentation**  
+https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-sign-ins
 
-- **Kusto Query Language Documentation**  
-  https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/
+**Kusto Query Language Documentation**  
+https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/
 
-- **Microsoft Entra Conditional Access Documentation**  
-  https://learn.microsoft.com/en-us/entra/identity/conditional-access/
+**Microsoft Entra Conditional Access Documentation**  
+https://learn.microsoft.com/en-us/entra/identity/conditional-access/
 
-- **Microsoft Defender Security Documentation**  
-  https://learn.microsoft.com/en-us/defender/
+**Microsoft Defender Security Documentation**  
+https://learn.microsoft.com/en-us/defender/
 
-- **MITRE ATT&CK Framework**  
-  https://attack.mitre.org/
+**MITRE ATT&CK Framework**  
+https://attack.mitre.org/
