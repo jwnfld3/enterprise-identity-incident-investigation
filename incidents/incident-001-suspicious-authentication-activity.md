@@ -116,3 +116,29 @@ Authentication telemetry provides valuable insight into potential credential abu
 Conditional Access policies play a critical role in preventing unauthorized access by enforcing additional authentication requirements and restricting suspicious login activity.
 
 Continuous monitoring and investigation of authentication anomalies are essential components of effective identity security operations.
+
+---
+
+## Documentation
+
+The investigation techniques and remediation procedures documented in this repository were developed through review of publicly available cybersecurity documentation and vendor guidance.
+
+The following documentation sources were referenced during the investigation process.
+
+- **Microsoft Sentinel Documentation**  
+  https://learn.microsoft.com/en-us/azure/sentinel/
+
+- **Microsoft Entra ID Sign-in Logs Documentation**  
+  https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-sign-ins
+
+- **Kusto Query Language Documentation**  
+  https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/
+
+- **Microsoft Entra Conditional Access Documentation**  
+  https://learn.microsoft.com/en-us/entra/identity/conditional-access/
+
+- **Microsoft Defender Security Documentation**  
+  https://learn.microsoft.com/en-us/defender/
+
+- **MITRE ATT&CK Framework**  
+  https://attack.mitre.org/
