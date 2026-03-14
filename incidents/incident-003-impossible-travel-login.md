@@ -46,5 +46,99 @@ Indicators included:
 
 Security investigators reviewed Microsoft Entra ID authentication logs.
 
-Evidence file:
+Evidence source: Microsoft Entra ID Sign-in Logs
 
+Investigators analyzed authentication telemetry including login timestamps, IP addresses, device information, and geographic location data.
+
+Log analysis confirmed that the user account successfully authenticated from Seattle, Washington, followed shortly by a login from Frankfurt, Germany. The short time interval between the two login events made legitimate travel between the locations impossible.
+
+---
+
+### Step 2 – Identify Suspicious Login Pattern
+
+Investigators compared the login locations and timestamps associated with the authentication events.
+
+Observed indicators included:
+
+- Authentication events originating from geographically distant locations
+- Login events occurring within minutes of each other
+- Geographic travel time inconsistent with normal human travel
+
+These indicators strongly suggested the possibility that the user’s credentials had been used from a separate location by an unauthorized party.
+
+---
+
+### Step 3 – Confirm User Activity
+
+Security investigators contacted the affected user to verify whether the authentication events were legitimate.
+
+The user confirmed that they were physically located in Seattle at the time of the login and had not traveled internationally.
+
+This confirmation indicated that the login activity from Frankfurt was unauthorized.
+
+---
+
+### Step 4 – Evaluate Security Controls
+
+Conditional Access and identity risk policies were reviewed to ensure appropriate security controls were in place.
+
+Security controls flagged the suspicious login activity and generated the Impossible Travel alert, allowing security investigators to respond quickly.
+
+---
+
+## Remediation
+
+The following remediation actions were taken to secure the affected account.
+
+- User password was reset
+- Active authentication sessions were revoked
+- User required to re-authenticate using Multi Factor Authentication
+- Security monitoring increased for the affected account
+- Conditional Access policies reviewed for additional protections
+
+These remediation actions ensured that the suspicious login activity did not result in unauthorized access to enterprise systems.
+
+---
+
+## MITRE ATT&CK Mapping
+
+| Technique | ID | Description |
+|---|---|---|
+| Valid Accounts | T1078 | Attempted authentication using legitimate user credentials |
+| Credential Access | T1110 | Unauthorized attempts to authenticate using compromised credentials |
+
+---
+
+## Lessons Learned
+
+This investigation demonstrates how identity risk monitoring systems can detect abnormal login patterns associated with compromised credentials.
+
+Impossible travel detection is an effective method for identifying potential credential compromise when authentication events originate from geographically distant locations within an unrealistic time frame.
+
+Prompt investigation of identity risk alerts and verification with affected users helps security teams quickly determine whether authentication activity is legitimate or malicious.
+
+Continuous monitoring of authentication telemetry is essential for protecting enterprise identity systems.
+
+---
+
+## Documentation
+
+The investigation techniques and remediation procedures documented in this incident report were developed through review of publicly available cybersecurity documentation and vendor guidance.
+
+- **Microsoft Sentinel Documentation**  
+  https://learn.microsoft.com/en-us/azure/sentinel/
+
+- **Microsoft Entra ID Sign-in Logs Documentation**  
+  https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-sign-ins
+
+- **Kusto Query Language Documentation**  
+  https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/
+
+- **Microsoft Entra Conditional Access Documentation**  
+  https://learn.microsoft.com/en-us/entra/identity/conditional-access/
+
+- **Microsoft Defender Security Documentation**  
+  https://learn.microsoft.com/en-us/defender/
+
+- **MITRE ATT&CK Framework**  
+  https://attack.mitre.org/
