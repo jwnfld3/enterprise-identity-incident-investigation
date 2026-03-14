@@ -135,6 +135,7 @@ KQL allows analysts to:
 
 Security analysts rely on KQL to investigate identity security alerts and perform threat hunting within Microsoft cloud environments.
 
+<sub>Back to [Quick Navigation](#quick-navigation)</sub>
 ---
 
 # Investigation Learning Process
@@ -180,6 +181,7 @@ The investigation workflow used in this project was learned by studying Microsof
 | Password Spray Attack Remediation | Investigation and containment procedures for password spray authentication attempts | https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/playbooks/password-spray-attack-remediation.md |
 | Phishing Attack Remediation | Investigation procedures for phishing based authentication attempts | https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/playbooks/phishing-attack-remediation.md |
 
+<sub>Back to [Quick Navigation](#quick-navigation)</sub>
 ---
 
 # Documentation Sources
@@ -200,6 +202,7 @@ https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/
 Microsoft Entra Conditional Access Documentation  
 https://learn.microsoft.com/en-us/entra/identity/conditional-access/
 
+<sub>Back to [Quick Navigation](#quick-navigation)</sub>
 ---
 
 ### MITRE ATT&CK Framework
@@ -214,3 +217,5 @@ https://attack.mitre.org/matrices/enterprise/
 All investigations and remediation procedures documented in this repository were performed in a simulated lab environment for educational purposes.
 
 The project demonstrates investigation methodology, authentication log analysis, and documentation practices commonly used within Security Operations Center environments.
+
+<sub>Back to [Quick Navigation](#quick-navigation)</sub>
