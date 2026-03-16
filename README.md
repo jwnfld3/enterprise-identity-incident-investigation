@@ -12,18 +12,6 @@ The investigation scenarios documented in this repository simulate real world Se
 
 ---
 
-# Quick Navigation
-
-| Section | Description |
-|---|---|
-| Investigation Scenarios | Security incidents analyzed in this repository |
-| Incident Response Playbooks | Remediation procedures for identity related attacks |
-| Investigation Methodology | SOC investigation workflow used during analysis |
-| Detection Queries | Example KQL queries used to identify suspicious activity |
-| Documentation Sources | Vendor documentation and security references |
-
----
-
 # Investigation Scenarios
 
 | Case ID | Incident | Description | Investigation Link |
