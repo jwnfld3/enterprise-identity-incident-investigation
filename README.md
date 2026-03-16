@@ -38,6 +38,27 @@ The following scenarios simulate identity related security incidents commonly in
 | CASE-009 | Phishing Attack | High | Resolved | [View Investigation](https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/incidents/case-009-phishing.md) |
 ---
 
+## Lab Environment Architecture
+
+The investigation scenarios in this project were developed within a controlled lab environment designed to simulate enterprise identity monitoring and security operations workflows.
+
+The lab environment includes authentication activity, detection rules, investigation workflows, and incident response procedures similar to those used by Security Operations Centers.
+
+### Lab Components
+
+| Component | Purpose |
+|----------|---------|
+| Windows Domain Environment | Simulates enterprise user authentication activity |
+| Microsoft Entra ID Logs | Provides identity authentication telemetry |
+| Microsoft Sentinel | Centralized security monitoring and detection |
+| Detection Rules (KQL) | Identify suspicious authentication behavior |
+| Investigation Cases | Document simulated SOC investigations |
+| Incident Response Playbooks | Demonstrate remediation procedures |
+
+This architecture enables simulation of identity based attacks including password spraying, MFA fatigue, impossible travel logins, phishing based credential compromise, token theft, and data exfiltration activity.
+
+---
+
 # Incident Response Playbooks
 
 | Playbook | Description | Playbook Link |
