@@ -11,6 +11,13 @@ This repository demonstrates enterprise identity security incident investigation
 The investigation scenarios documented in this repository simulate real world Security Operations Center workflows used to analyze authentication anomalies, identify indicators of compromise, and apply remediation actions within Microsoft cloud environments.
 
 ---
+## SOC Navigation
+
+[![Investigation Cases](https://img.shields.io/badge/Investigation_Cases-9-blue)](https://github.com/jwnfld3/enterprise-identity-incident-investigation/tree/main/incidents)
+[![Detection Rules](https://img.shields.io/badge/Detection_Rules-6-purple)](https://github.com/jwnfld3/enterprise-identity-incident-investigation/tree/main/detections)
+[![Response Playbooks](https://img.shields.io/badge/Response_Playbooks-3-red)](https://github.com/jwnfld3/enterprise-identity-incident-investigation/tree/main/playbooks)
+[![Threat Intelligence](https://img.shields.io/badge/Threat_Intelligence-Analysis-orange)](https://github.com/jwnfld3/enterprise-identity-incident-investigation/tree/main/threat-intelligence)
+[![MITRE ATT&CK](https://img.shields.io/badge/MITRE_ATT%26CK-Mapped-green)](https://attack.mitre.org/)
 
 ## SOC Investigation Dashboard
 
