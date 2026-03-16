@@ -21,11 +21,11 @@ Affected System: Microsoft 365
 
 ## Incident Summary
 
-Suspicious authentication activity was detected targeting a Microsoft 365 user account. Security monitoring systems identified repeated authentication attempts originating from an unfamiliar geographic location that had not previously been associated with the user.
+Suspicious authentication attempts were detected targeting a user account within the Microsoft 365 environment.
 
-The authentication attempts resulted in multiple failed login events before Conditional Access policies blocked further attempts. The pattern of activity suggested a potential credential attack targeting the user account.
+Authentication attempts originated from a foreign IP address that had not previously been associated with the user. Multiple failed login attempts were recorded before Conditional Access policies blocked further attempts.
 
-Security analysts initiated an investigation to determine whether the activity represented compromised credentials, automated attack activity, or legitimate user behavior.
+Security monitoring systems flagged the activity due to abnormal login patterns and geographic location anomalies.
 
 ---
 
@@ -33,10 +33,10 @@ Security analysts initiated an investigation to determine whether the activity r
 
 Time (UTC) | Event
 --- | ---
-09:10 | Multiple failed authentication attempts detected
-09:12 | Authentication attempts observed from foreign IP address
-09:15 | Conditional Access policy blocked login attempt
-09:18 | Microsoft Sentinel generated security alert
+09:10 | Suspicious authentication attempts detected
+09:12 | Multiple failed login attempts recorded
+09:15 | Conditional Access policy blocked authentication attempt
+09:18 | Security alert generated in Microsoft Sentinel
 09:20 | Security investigation initiated
 10:05 | Investigation completed and account secured
 
@@ -48,41 +48,72 @@ The incident was detected through Microsoft Entra ID sign-in monitoring alerts.
 
 Indicators included:
 
-- Multiple failed authentication attempts
-- Login attempts originating from a foreign IP address
-- Authentication attempts outside the user's typical geographic region
-- Abnormal authentication patterns identified by security monitoring systems
+- Multiple failed login attempts
+- Authentication attempts from a foreign IP address
+- Login attempts originating from an unusual geographic location
 
 ---
 
 ## Investigation
 
-Security analysts followed a structured investigation process to analyze the authentication activity and determine whether the behavior represented malicious activity.
+Security analysts followed a structured investigation process to determine whether the activity represented malicious behavior.
 
-### Step 1 Review Entra ID Sign-in Logs
+---
 
-Investigators reviewed authentication logs to identify the source of the login attempts and determine whether the activity matched normal user behavior.
+### Step 1 Review Microsoft Entra ID Sign-in Logs
 
-Authentication events were reviewed for:
+1. Open the Azure Portal  
+https://portal.azure.com
 
-- source IP address
-- geographic location
-- authentication result
-- authentication method
-- application access
+2. Navigate to **Microsoft Entra ID**
 
-### Step 2 Analyze Security Alerts in Microsoft Sentinel
+3. Select **Monitoring & Health**
 
-Security analysts reviewed the alert generated in Microsoft Sentinel to identify the entities associated with the incident.
+4. Click **Sign-in Logs**
 
-Alert details included:
+5. In the search filters:
 
-- affected user account
-- source IP address
-- triggered detection rule
-- related authentication events
+- Enter the affected user account
+- Adjust the time range to match the incident timeframe
+- Review the **Client IP Address**
+- Review the **Location**
+- Review the **Authentication Result**
 
-### Step 3 Perform Authentication Log Analysis Using KQL
+6. Identify abnormal login indicators such as:
+
+- unfamiliar IP addresses
+- foreign geographic locations
+- repeated authentication failures
+- abnormal login times
+
+---
+
+### Step 2 Investigate Security Alerts in Microsoft Sentinel
+
+1. Open **Microsoft Sentinel** in the Azure Portal.
+
+2. Select **Incidents**.
+
+3. Locate the alert associated with the suspicious authentication activity.
+
+4. Click the incident to view:
+
+- alert details
+- associated entities
+- triggered analytics rules
+- investigation graph
+
+5. Review related alerts connected to the user account.
+
+---
+
+### Step 3 Query Authentication Logs Using Kusto Query Language (KQL)
+
+1. In **Microsoft Sentinel**, select **Logs**.
+
+2. Run a query against authentication events.
+
+Example query:
 
 ```kusto
 SigninLogs
@@ -91,9 +122,19 @@ SigninLogs
 | order by TimeGenerated desc
 ```
 
-The query was used to identify abnormal authentication patterns and correlate related login events.
+3. Review results for:
+
+- login location anomalies
+- authentication failures
+- unusual application access
+
+---
 
 ### Step 4 Review Cloud Activity Logs
+
+1. In **Microsoft Sentinel Logs**, query Microsoft 365 activity.
+
+Example query:
 
 ```kusto
 OfficeActivity
@@ -102,26 +143,65 @@ OfficeActivity
 | order by TimeGenerated desc
 ```
 
-Cloud activity logs were reviewed to determine whether unauthorized actions occurred following the authentication attempts.
+2. Identify abnormal actions such as:
 
-### Step 5 Validate IP Reputation
+- mass file downloads
+- mailbox access
+- SharePoint document access
+- OneDrive activity
 
-Investigators analyzed the reputation of the source IP address using external threat intelligence sources to determine whether the IP had been previously associated with malicious activity.
+---
+
+### Step 5 Validate IP Address Reputation
+
+Investigators validated suspicious IP addresses using threat intelligence sources.
+
+- https://www.abuseipdb.com  
+- https://otx.alienvault.com  
+- https://www.microsoft.com/en-us/security/business/security-intelligence  
+
+Indicators reviewed include:
+
+- malicious reputation score
+- previous attack reports
+- geographic origin
+- known threat actor infrastructure
+
+---
 
 ### Step 6 Confirm User Activity
 
-The affected user was contacted to determine whether the authentication attempts were legitimate. The user confirmed that they had not initiated the login attempts.
+Security investigators contacted the affected user to verify whether the login activity was legitimate.
+
+User confirmation helps determine whether authentication activity represents:
+
+- legitimate user behavior
+- compromised credentials
+- automated attack activity
+
+---
+
+### Step 7 Evaluate Security Controls
+
+Security analysts reviewed identity protection controls including:
+
+- Multi Factor Authentication
+- Conditional Access Policies
+- Account Lockout Policies
+- Identity Protection Risk Alerts
+
+This step determines whether existing security controls successfully prevented unauthorized access.
 
 ---
 
 ## Indicators of Compromise
 
-Indicator Type | Value | Description
+Indicator Type | Indicator Value | Description
 --- | --- | ---
-User Account | jsmith@company.com | Targeted account
-IP Address | 185.193.xxx.xxx | Foreign IP associated with login attempts
-Authentication Result | Failed Sign-in Attempts | Multiple authentication failures
-Target Application | Microsoft 365 | Targeted cloud service
+User Account | jsmith@company.com | Targeted account involved in suspicious authentication attempts
+IP Address | 185.193.xxx.xxx | Foreign IP address associated with failed authentication attempts
+Authentication Method | Password Authentication | Repeated password-based authentication attempts observed
+Application Access | Microsoft 365 | Authentication attempts targeting cloud services
 
 ---
 
@@ -133,7 +213,7 @@ T1110 | Brute Force
 T1110.003 | Password Spraying
 T1078 | Valid Accounts
 
-These techniques represent common methods used by attackers attempting to gain access to enterprise identity systems.
+These techniques are commonly associated with credential access attempts targeting enterprise identity systems.
 
 ---
 
@@ -141,23 +221,25 @@ These techniques represent common methods used by attackers attempting to gain a
 
 ### Strengthen Conditional Access Policies
 
-Implement Conditional Access rules that require additional authentication verification for login attempts originating from unfamiliar locations.
-
-### Monitor Authentication Anomalies
-
-Configure automated detection rules to identify abnormal authentication patterns such as repeated failed login attempts or impossible travel scenarios.
+Require Multi Factor Authentication for authentication attempts originating from unfamiliar locations and block high-risk geographic regions when possible.
 
 ### Implement Identity Protection Policies
 
-Enable identity risk detection policies that automatically block high-risk authentication attempts and require password resets when suspicious activity is detected.
+Enable automated identity protection controls that detect high-risk sign-in attempts and require password reset for compromised accounts.
 
-### Improve Security Awareness
+### Monitor Authentication Anomalies
 
-Provide security awareness training to help users recognize suspicious authentication notifications and potential credential compromise attempts.
+Deploy detection rules within Microsoft Sentinel that alert analysts when authentication anomalies occur.
+
+### Improve User Security Awareness
+
+Provide security awareness training to help users recognize suspicious authentication activity and potential credential attacks.
 
 ---
 
 ## Documentation
+
+The investigation techniques and procedures documented in this repository were developed through review of publicly available cybersecurity documentation.
 
 Microsoft Sentinel Documentation  
 https://learn.microsoft.com/en-us/azure/sentinel/
@@ -167,6 +249,12 @@ https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-sign-
 
 Kusto Query Language Documentation  
 https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/
+
+Microsoft Entra Conditional Access Documentation  
+https://learn.microsoft.com/en-us/entra/identity/conditional-access/
+
+Microsoft Defender Security Documentation  
+https://learn.microsoft.com/en-us/defender/
 
 MITRE ATT&CK Framework  
 https://attack.mitre.org/
