@@ -16,20 +16,19 @@ The investigation scenarios documented in this repository simulate real world Se
 
 Total Investigations: **9** | Environment: **Microsoft Entra ID / Microsoft Sentinel** | Investigation Status: **Completed**
 
-The following scenarios simulate identity-related security incidents commonly investigated by Security Operations Center analysts. Each case demonstrates authentication log analysis, detection techniques, MITRE ATT&CK mapping, and incident response procedures within Microsoft cloud environments.
+The following scenarios simulate identity related security incidents commonly investigated by Security Operations Center analysts. Each case demonstrates authentication log analysis, detection techniques, MITRE ATT&CK mapping, and incident response procedures within Microsoft cloud environments.
 
 | Case ID | Incident Type | Severity | Status | Investigation |
 |:------:|---------------|:--------:|:------:|--------------|
-| CASE-001 | Suspicious Authentication Activity | High | Resolved | [View Investigation](https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/case-files/case-001-suspicious-authentication.md) |
-| CASE-002 | MFA Fatigue Attack | High | Resolved | [View Investigation](https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/case-files/case-002-mfa-fatigue.md) |
-| CASE-003 | Impossible Travel Login | Medium | Resolved | [View Investigation](https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/case-files/case-003-impossible-travel.md) |
-| CASE-004 | Disabled Account Authentication | Medium | Resolved | [View Investigation](https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/case-files/case-004-disabled-account.md) |
-| CASE-005 | Conditional Access Policy Block | Low | Resolved | [View Investigation](https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/case-files/case-005-conditional-access.md) |
-| CASE-006 | Password Spray Attack | High | Resolved | [View Investigation](https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/case-files/case-006-password-spray.md) |
-| CASE-007 | Data Exfiltration Activity | High | Resolved | [View Investigation](https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/case-files/case-007-data-exfiltration.md) |
-| CASE-008 | Identity Account Compromise | Critical | Resolved | [View Investigation](https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/case-files/case-008-identity-compromise.md) |
-| CASE-009 | Phishing Attack | High | Resolved | [View Investigation](https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/case-files/case-009-phishing.md) |
-
+| CASE-001 | Suspicious Authentication Activity | High | Resolved | [View Investigation](https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/incidents/case-001-suspicious-authentication.md) |
+| CASE-002 | MFA Fatigue Attack | High | Resolved | [View Investigation](https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/incidents/case-002-mfa-fatigue.md) |
+| CASE-003 | Impossible Travel Login | Medium | Resolved | [View Investigation](https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/incidents/case-003-impossible-travel.md) |
+| CASE-004 | Disabled Account Authentication | Medium | Resolved | [View Investigation](https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/incidents/case-004-disabled-account.md) |
+| CASE-005 | Conditional Access Policy Block | Low | Resolved | [View Investigation](https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/incidents/case-005-conditional-access.md) |
+| CASE-006 | Password Spray Attack | High | Resolved | [View Investigation](https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/incidents/case-006-password-spray.md) |
+| CASE-007 | Data Exfiltration Activity | High | Resolved | [View Investigation](https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/incidents/case-007-data-exfiltration.md) |
+| CASE-008 | Identity Account Compromise | Critical | Resolved | [View Investigation](https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/incidents/case-008-identity-compromise.md) |
+| CASE-009 | Phishing Attack | High | Resolved | [View Investigation](https://github.com/jwnfld3/enterprise-identity-incident-investigation/blob/main/incidents/case-009-phishing.md) |
 ---
 
 # Incident Response Playbooks
